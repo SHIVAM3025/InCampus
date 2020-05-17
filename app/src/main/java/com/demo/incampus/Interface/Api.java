@@ -1,5 +1,7 @@
 package com.demo.incampus.Interface;
 
+import com.demo.incampus.CommonGraphqlModels.CommentCountResponse;
+import com.demo.incampus.CommonGraphqlModels.InsertCommentResponse;
 import com.demo.incampus.DiffUtils.Categories.Data_Categories;
 import com.demo.incampus.DiffUtils.Comments.CommentsResponse;
 import com.demo.incampus.DiffUtils.Explore.Explore_Event_Response;
@@ -133,6 +135,12 @@ public interface Api {
 
     @POST("graphql/")
     Call<CommentsResponse> getCommentsOnPost(@Body JsonObject body);
+
+    @POST("graphql")
+    Call<InsertCommentResponse> insertComment(@Body JsonObject body);
+
+    @POST("graphql")
+    Call<CommentCountResponse> getCommentCount(@Body JsonObject body);
 
 }
 
