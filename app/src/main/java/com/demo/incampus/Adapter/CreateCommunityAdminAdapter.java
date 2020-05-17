@@ -8,24 +8,41 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.paging.PagedListAdapter;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.demo.incampus.Model.ManageCommunityAdmin;
+import com.bumptech.glide.Glide;
+import com.demo.incampus.DiffUtils.Fragment.CommunityAdmin.Community_Admin_Response;
+import com.demo.incampus.Model.ManageCommunityMembers;
 import com.demo.incampus.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CreateCommunityAdminAdapter extends RecyclerView.Adapter<CreateCommunityAdminAdapter.CreateCommunityAdminHolder> {
+public class CreateCommunityAdminAdapter extends PagedListAdapter<Community_Admin_Response.Community_members, CreateCommunityAdminAdapter.CreateCommunityAdminHolder> {
 
     private Context context;
-    private ArrayList<ManageCommunityAdmin> manageCommunityAdmins;
 
-
-    public CreateCommunityAdminAdapter(Context context, ArrayList<ManageCommunityAdmin> createCommunityAdmins) {
+    public CreateCommunityAdminAdapter(Context context) {
+        super(diffCallback);
         this.context = context;
-        this.manageCommunityAdmins = createCommunityAdmins;
-
     }
+
+    private static DiffUtil.ItemCallback<Community_Admin_Response.Community_members> diffCallback =
+            new DiffUtil.ItemCallback<Community_Admin_Response.Community_members>() {
+                @Override
+                public boolean areItemsTheSame(@NonNull Community_Admin_Response.Community_members oldItem, @NonNull Community_Admin_Response.Community_members newItem) {
+                    // Post id will be used to differentiate b/w 2 posts
+                   return oldItem.getId().equals(newItem.getId());
+                }
+
+                @Override
+                public boolean areContentsTheSame(@NonNull Community_Admin_Response.Community_members oldItem, @NonNull Community_Admin_Response.Community_members newItem) {
+                    return oldItem.getCommunity_to_members_relationship().getPic_url().equals(newItem.getCommunity_to_members_relationship().getPic_url());
+                }
+            };
+
 
     @NonNull
     @Override
@@ -38,31 +55,30 @@ public class CreateCommunityAdminAdapter extends RecyclerView.Adapter<CreateComm
     @Override
     public void onBindViewHolder(@NonNull CreateCommunityAdminHolder holder, int position) {
 
-        ManageCommunityAdmin posi = manageCommunityAdmins.get(position);
+        Community_Admin_Response.Community_members posi = getItem(position);
 
-        holder.society_name.setText(posi.getSociety_name());
-        holder.followers.setText(posi.getFollowers());
-        holder.society_photo.setImageDrawable(context.getResources().getDrawable(posi.getSociety_photo()));
+        holder.name.setText(posi.getCommunity_to_members_relationship().getName());
+       holder.followers.setText(posi.getCommunity_to_members_relationship().getMember_count() + " followers");
+
+        Glide.with(context)
+                .load(posi.getCommunity_to_members_relationship().getPic_url())
+                .into(holder.profile_photo);
 
 
     }
 
-    @Override
-    public int getItemCount() {
-        return manageCommunityAdmins.size();
-    }
 
     static class CreateCommunityAdminHolder extends RecyclerView.ViewHolder {
 
-        TextView society_name, followers;
-        ImageView society_photo;
+        TextView name, followers;
+        ImageView profile_photo;
 
         CreateCommunityAdminHolder(@NonNull View itemView) {
             super(itemView);
 
-            society_name = itemView.findViewById(R.id.society_name);
+            name = itemView.findViewById(R.id.name);
             followers = itemView.findViewById(R.id.followers);
-            society_photo = itemView.findViewById(R.id.society_photo);
+            profile_photo = itemView.findViewById(R.id.society_photo);
 
 
         }

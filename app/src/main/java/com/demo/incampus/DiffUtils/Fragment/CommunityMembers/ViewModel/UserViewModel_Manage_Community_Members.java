@@ -6,21 +6,21 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PageKeyedDataSource;
 import androidx.paging.PagedList;
 
-import com.demo.incampus.DiffUtils.Fragment.CommunityMembers.CommunityMembersResponse;
-import com.demo.incampus.DiffUtils.Fragment.CommunityMembers.CommunityMembersResponse.community_to_members_relationship;
+import com.demo.incampus.DiffUtils.Fragment.CommunityMembers.Community_Members_Response;
 import com.demo.incampus.DiffUtils.Fragment.CommunityMembers.DataSource.DataSourceFactory_ManageCommunity_Members;
 import com.demo.incampus.DiffUtils.Fragment.CommunityMembers.DataSource.DataSource_ManageCommunity_Members;
 
 public class UserViewModel_Manage_Community_Members extends ViewModel {
 
-    private LiveData<PagedList<CommunityMembersResponse.Community_members>> homePagedList;
-    private LiveData<PageKeyedDataSource<Integer, CommunityMembersResponse.Community_members>> liveDataSource;
 
-    public LiveData<PagedList<CommunityMembersResponse.Community_members>> getHomePagedList() {
+    private LiveData<PagedList<Community_Members_Response.Community_members>> homePagedList;
+    private LiveData<PageKeyedDataSource<Integer, Community_Members_Response.Community_members>> liveDataSource;
+
+    public LiveData<PagedList<Community_Members_Response.Community_members>> getHomePagedList() {
         return homePagedList;
     }
 
-    public LiveData<PageKeyedDataSource<Integer, CommunityMembersResponse.Community_members>> getLiveDataSource() {
+    public LiveData<PageKeyedDataSource<Integer, Community_Members_Response.Community_members>> getLiveDataSource() {
         return liveDataSource;
     }
 
@@ -42,6 +42,7 @@ public class UserViewModel_Manage_Community_Members extends ViewModel {
         homePagedList = (new LivePagedListBuilder(homeDataSourceFactory, pagedListConfig))
                 .build();
     }
+
 
 
 }

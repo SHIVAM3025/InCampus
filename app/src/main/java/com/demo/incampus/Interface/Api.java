@@ -2,7 +2,8 @@ package com.demo.incampus.Interface;
 
 import com.demo.incampus.DiffUtils.Categories.Data_Categories;
 import com.demo.incampus.DiffUtils.Explore.Explore_Event_Response;
-import com.demo.incampus.DiffUtils.Fragment.CommunityMembers.CommunityMembersResponse;
+import com.demo.incampus.DiffUtils.Fragment.CommunityAdmin.Community_Admin_Response;
+import com.demo.incampus.DiffUtils.Fragment.CommunityMembers.Community_Members_Response;
 import com.demo.incampus.DiffUtils.HomeActivity.Home_Post_Response;
 import com.demo.incampus.DiffUtils.ManageEvents.ManageEvents_Data;
 import com.demo.incampus.DiffUtils.Profile.CommunityNumber.Community_Number_Data;
@@ -124,7 +125,10 @@ public interface Api {
     Call<JsonObject> createEvent(@Body JsonObject body);
 
     @POST("graphql/")
-    Call<CommunityMembersResponse> getManageCommunity_Members(@Body JsonObject body);
+    Call<Community_Admin_Response> getManageCommunity_Admin(@Body JsonObject body);
+
+    @POST("graphql/")
+    Call<Community_Members_Response> getManageCommunity_Members(@Body JsonObject body);
 
 }
 

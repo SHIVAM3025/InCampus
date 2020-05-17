@@ -5,45 +5,53 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Objects;
 
-public class CommunityMembersResponse {
+public class Community_Members_Response {
 
-   private Data data;
+    private Data data;
 
     public Data getData() {
         return data;
     }
 
-    public static class Data
-    {
+    public static class Data {
+
+        @SerializedName("Community_members")
         private List<Community_members> community_members;
 
         public List<Community_members> getCommunity_members() {
             return community_members;
         }
+
+        public void setCommunity_members(List<Community_members> community_members) {
+            this.community_members = community_members;
+        }
     }
 
-    public static class Community_members{
-        private List<community_to_members_relationship> community_to_members_relationshipList;
+    public static class Community_members {
 
-        public List<community_to_members_relationship> getCommunity_to_members_relationshipList() {
-            return community_to_members_relationshipList;
+        @SerializedName("community_to_member_relationship")
+        private community_to_members_relationship community_to_members_relationship;
+
+        @SerializedName("id")
+        private String id;
+
+        public community_to_members_relationship getCommunity_to_members_relationship() {
+            return community_to_members_relationship;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setCommunity_to_members_relationship(community_to_members_relationship community_to_members_relationship) {
+            this.community_to_members_relationship = community_to_members_relationship;
         }
     }
 
 
-    public static class community_to_members_relationship
-    {
-        private Community_Details list;
-
-        public Community_Details getList() {
-            return list;
-        }
-    }
-
-    public static class Community_Details
-    {
+    public static class community_to_members_relationship {
         @SerializedName("member_count")
-        private String member_count ;
+        private String member_count;
 
         @SerializedName("name")
         private String name;
@@ -51,7 +59,7 @@ public class CommunityMembersResponse {
         @SerializedName("pic_url")
         private String pic_url;
 
-        public Community_Details(String member_count, String name, String pic_url) {
+        public community_to_members_relationship(String member_count, String name, String pic_url) {
             this.member_count = member_count;
             this.name = name;
             this.pic_url = pic_url;
@@ -85,7 +93,7 @@ public class CommunityMembersResponse {
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
-            Community_Details that = (Community_Details) o;
+            community_to_members_relationship that = (community_to_members_relationship) o;
             return Objects.equals(member_count, that.member_count) &&
                     Objects.equals(name, that.name) &&
                     Objects.equals(pic_url, that.pic_url);
@@ -106,6 +114,7 @@ public class CommunityMembersResponse {
         }
 
     }
+
 
 
 

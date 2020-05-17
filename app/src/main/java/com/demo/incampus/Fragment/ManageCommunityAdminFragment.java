@@ -8,11 +8,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.demo.incampus.Adapter.CreateCommunityAdminAdapter;
-import com.demo.incampus.Model.ManageCommunityAdmin;
+import com.demo.incampus.DiffUtils.Fragment.CommunityAdmin.Community_Admin_Response;
+import com.demo.incampus.DiffUtils.Fragment.CommunityAdmin.ViewModel.UserViewModel_Manage_Community_Admin;
 import com.demo.incampus.R;
 
 import java.util.ArrayList;
@@ -23,7 +27,7 @@ public class ManageCommunityAdminFragment extends Fragment {
     View view;
     RecyclerView recyclerView;
     CreateCommunityAdminAdapter adapter;
-    ArrayList<ManageCommunityAdmin> createCommunityAdminArrayList;
+    private LiveData<PagedList<Community_Admin_Response.Community_members>> homePagedList;
 
 
     public ManageCommunityAdminFragment() {
@@ -35,23 +39,15 @@ public class ManageCommunityAdminFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_admin_managecommunity, container, false);
 
         //Recycler View Code
-        createCommunityAdminArrayList = new ArrayList<>();
         recyclerView = view.findViewById(R.id.adminRecyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        UserViewModel_Manage_Community_Admin homeViewModel = ViewModelProviders.of(this).get(UserViewModel_Manage_Community_Admin.class);
 
-        createCommunityAdminArrayList.add(new ManageCommunityAdmin("Kalakriti", "700 followers", R.drawable.scene));
-        createCommunityAdminArrayList.add(new ManageCommunityAdmin("Gallery One", "350 followers", R.drawable.scene));
-        createCommunityAdminArrayList.add(new ManageCommunityAdmin("Chitrakar", "980 followers", R.drawable.scene));
-        createCommunityAdminArrayList.add(new ManageCommunityAdmin("Sketch Paint", "100 followers", R.drawable.scene));
-        createCommunityAdminArrayList.add(new ManageCommunityAdmin("Royal Painters", "560 followers", R.drawable.scene));
-        createCommunityAdminArrayList.add(new ManageCommunityAdmin("Paint Box", "280 followers", R.drawable.scene));
-        createCommunityAdminArrayList.add(new ManageCommunityAdmin("Canvas", "456 followers", R.drawable.scene));
-        createCommunityAdminArrayList.add(new ManageCommunityAdmin("Just Paint", "870 followers", R.drawable.scene));
-        createCommunityAdminArrayList.add(new ManageCommunityAdmin("Art is Life", "550 followers", R.drawable.scene));
+        adapter = new CreateCommunityAdminAdapter(getActivity());
 
-
-        adapter = new CreateCommunityAdminAdapter(getContext(), createCommunityAdminArrayList);
+        homePagedList = homeViewModel.getHomePagedList();
+        homePagedList.observe(getActivity(), homes -> adapter.submitList(homes));
 
         recyclerView.setAdapter(adapter);
 

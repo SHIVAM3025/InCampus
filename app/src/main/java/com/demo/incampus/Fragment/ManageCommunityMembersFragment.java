@@ -15,9 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.demo.incampus.Adapter.CreateCommunityMembersAdapter;
-import com.demo.incampus.DiffUtils.Fragment.CommunityMembers.CommunityMembersResponse;
+import com.demo.incampus.DiffUtils.Fragment.CommunityMembers.Community_Members_Response;
 import com.demo.incampus.DiffUtils.Fragment.CommunityMembers.ViewModel.UserViewModel_Manage_Community_Members;
-import com.demo.incampus.Model.ManageCommunityMembers;
 import com.demo.incampus.R;
 
 import java.util.ArrayList;
@@ -28,8 +27,8 @@ public class ManageCommunityMembersFragment extends Fragment {
     View view;
     RecyclerView recyclerView;
     CreateCommunityMembersAdapter adapter;
-    private LiveData<PagedList<CommunityMembersResponse.Community_members>> homePagedList;
-
+    private LiveData<PagedList<Community_Members_Response.Community_members>> homePagedList;
+   // CreateCommunityMembersAdapter adapter;
 
     public ManageCommunityMembersFragment() {
     }
@@ -40,21 +39,17 @@ public class ManageCommunityMembersFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_members_managecommunity, container, false);
 
         //Recycler View Code
-
+        UserViewModel_Manage_Community_Members homeViewModel = ViewModelProviders.of(this).get(UserViewModel_Manage_Community_Members.class);
         recyclerView = view.findViewById(R.id.membersRecyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        UserViewModel_Manage_Community_Members homeViewModel = ViewModelProviders.of(this).get(UserViewModel_Manage_Community_Members.class);
+        adapter = new CreateCommunityMembersAdapter(getActivity());
 
-        //creating the Adapter
-        adapter = new CreateCommunityMembersAdapter(getContext());
-
-        //observing the homePagedList from view modexl
         homePagedList = homeViewModel.getHomePagedList();
         homePagedList.observe(getActivity(), homes -> adapter.submitList(homes));
 
-        recyclerView.setAdapter(adapter);
+       recyclerView.setAdapter(adapter);
         return view;
 
     }

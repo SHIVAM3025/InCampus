@@ -4,11 +4,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.paging.DataSource;
 import androidx.paging.PageKeyedDataSource;
 
-import com.demo.incampus.DiffUtils.Fragment.CommunityMembers.CommunityMembersResponse;
+import com.demo.incampus.DiffUtils.Fragment.CommunityMembers.Community_Members_Response;
 
 public class DataSourceFactory_ManageCommunity_Members extends DataSource.Factory {
-    //creating the mutable live data
-    private MutableLiveData<PageKeyedDataSource<Integer, CommunityMembersResponse.Community_members>> homeLiveDataSource =
+    private MutableLiveData<PageKeyedDataSource<Integer, Community_Members_Response.Community_members>> homeLiveDataSource =
             new MutableLiveData<>();
 
     @Override
@@ -24,7 +23,7 @@ public class DataSourceFactory_ManageCommunity_Members extends DataSource.Factor
     }
 
     //getter for homeLiveDataSource
-    public MutableLiveData<PageKeyedDataSource<Integer, CommunityMembersResponse.Community_members>> getHomeLiveDataSource() {
+    public MutableLiveData<PageKeyedDataSource<Integer, Community_Members_Response.Community_members>> getHomeLiveDataSource() {
 
         return homeLiveDataSource;
     }
