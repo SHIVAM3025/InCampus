@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f1f0f2">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="15dp"
+        app:cardBackgroundColor="#f1f0f2"
+        app:cardCornerRadius="50dp">
+
+        <RelativeLayout
+            android:id="@+id/home_relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_cards1"
+            android:backgroundTint="#fff">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profilephoto"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="40dp"
+                android:src="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/topic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="112dp"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:text="Basketball"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/user_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/topic"
+                android:layout_marginStart="112dp"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="jain_preyesh"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/user_profile_name"
+                android:layout_marginStart="112dp"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="1 hour ago"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/downarrow"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="20dp"
+                android:tint="#757575"
+                app:srcCompat="@drawable/arrow_down" />
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/time"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Anyone up for the basketball game? I will be at the complex around 5pm. Acknowledge if you are coming."
+                android:textAlignment="viewStart"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:gravity="center"
+                android:text="May 2-4"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/event_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:text="6 pm"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

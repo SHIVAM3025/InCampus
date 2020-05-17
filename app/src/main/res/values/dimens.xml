@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="arrow_dimens">30dp</dimen>
+    <dimen name="edit">30dp</dimen>
+    <dimen name="cross">30dp</dimen>
+    <dimen name="icon">30dp</dimen>
+    <dimen name="profile_pic">40dp</dimen>
+    <dimen name="topic_margin_bottom">20dp</dimen>
+    <dimen name="topic_size">28sp</dimen>
+    <dimen name="topic_margin_start">50dp</dimen>
+</resources>

@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".Activity.CreateCommunityActivity">
+
+    <RelativeLayout
+        android:id="@+id/relLayout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/qr_inv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/cross"
+            android:layout_height="@dimen/cross"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:scaleX="-1"
+            android:src="@drawable/clear"
+            android:tint="@color/colorPrimaryDark" />
+
+        <TextView
+            android:id="@+id/createCommunityTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/topic_margin_start"
+            android:layout_marginBottom="@dimen/topic_margin_bottom"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Create a Community"
+            android:textColor="#000"
+            android:textSize="@dimen/topic_size" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/createCommunityButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/relLayout">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Name of the Community"
+                android:textColor="#c3c3c3"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/nameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nameTextView"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="4dp"
+                android:backgroundTint="#c3c3c3"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:inputType="textVisiblePassword|textNoSuggestions"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/communityTagTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nameEditText"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Community Tag"
+                android:textColor="#c3c3c3"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/communityTagEditText"
+                android:layout_width="224dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/communityTagTextView"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="4dp"
+                android:backgroundTint="#c3c3c3"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:inputType="textVisiblePassword|textNoSuggestions"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nameEditText"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/open"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:text="Open"
+                        android:textColor="#fff"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="/"
+                        android:textColor="#c3c3c3"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/close"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Close"
+                        android:textColor="#c3c3c3"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/switchButton"
+                    android:layout_width="72dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/roundrect2"
+                    android:backgroundTint="#fff"
+                    android:gravity="center"
+                    android:thumb="@drawable/switch_thumb_selector" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/descriptionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/communityTagEditText"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Description"
+                android:textColor="#c3c3c3"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/descriptionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/descriptionTextView"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="4dp"
+                android:backgroundTint="#c3c3c3"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:gravity="top|start"
+                android:inputType="textMultiLine|textVisiblePassword|textNoSuggestions"
+                android:scrollbars="vertical"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+
+            <ImageView
+                android:id="@+id/coverImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/descriptionEditText"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:scaleType="centerCrop"
+                android:src="@android:color/transparent" />
+
+            <Button
+                android:id="@+id/uploadCoverPhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/coverImageView"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/roundrect2"
+                android:backgroundTint="@color/colorAccent"
+                android:fontFamily="@font/montserrat_medium"
+                android:padding="5dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:text="Upload Cover Photo"
+                android:textColor="#fff"
+                android:textSize="14sp" />
+
+
+            <TextView
+                android:id="@+id/communityCategoryTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/uploadCoverPhoto"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Community Category"
+                android:textColor="#c3c3c3"
+                android:textSize="14sp" />
+
+            <Spinner
+                android:id="@+id/communityCategorySpinner"
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/communityCategoryTextView"
+                android:layout_marginTop="4dp"
+                android:backgroundTint="@android:color/darker_gray"
+                android:spinnerMode="dialog" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/createCommunityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/roundrect2"
+        android:backgroundTint="@color/colorPrimary"
+        android:fontFamily="@font/montserrat_medium"
+        android:padding="5dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:text="CREATE COMMUNITY"
+        android:textColor="#fff"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

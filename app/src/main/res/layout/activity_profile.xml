@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".Activity.ProfileActivity">
+
+    <RelativeLayout
+        android:id="@+id/mainRelLayout"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:background="@drawable/qr_inv"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/rlp"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:background="@drawable/qr_inv">
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="0dp"
+                android:layout_marginVertical="0dp">
+
+
+                <ImageView
+                    android:id="@+id/back_arrow"
+                    android:layout_width="@dimen/arrow_dimens"
+                    android:layout_height="@dimen/arrow_dimens"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:scaleX="-1"
+                    android:src="@drawable/arrow"
+                    android:tint="@color/colorPrimaryDark" />
+
+                <ImageView
+                    android:id="@+id/edit"
+                    android:layout_width="@dimen/edit"
+                    android:layout_height="@dimen/edit"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/edit"
+                    android:tint="@color/colorPrimaryDark" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                   />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/profile_image"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text=""
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/college_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/name"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text=""
+                    android:textColor="#808080"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/follow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/college_name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/roundrect2"
+                    android:backgroundTint="@color/colorAccent"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingStart="36dp"
+                    android:paddingEnd="36dp"
+                    android:text="FOLLOW"
+                    android:textColor="#fff"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linLayout"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/rlp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="0dp"
+                android:layout_marginVertical="0dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/community_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|top"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="25dp"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:gravity="center"
+                        android:text="-"
+                        android:textAlignment="center"
+                        android:textColor="#fff"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/community"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginBottom="0dp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="COMMUNITY"
+                        android:textColor="#fff"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent">
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="#4C4C4C" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/following_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|top"
+                        android:layout_marginTop="25dp"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:gravity="center"
+                        android:text="-"
+                        android:textAlignment="center"
+                        android:textColor="#fff"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/following"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginBottom="0dp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="FOLLOWING"
+                        android:textColor="#fff"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent">
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="#4C4C4C" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/followers_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|top"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginEnd="15dp"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:gravity="center"
+                        android:text="-"
+                        android:textAlignment="center"
+                        android:textColor="#fff"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/followers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="0dp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="FOLLOWERS"
+                        android:textColor="#fff"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <!--    TO BE REMOVED IN NEXT VERSION-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/profileRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainRelLayout" />
+
+    <!--    TO BE ADDED IN NEXT VERSION-->
+    <!--    <com.google.android.material.tabs.TabLayout-->
+    <!--        android:id="@+id/tabLayout"-->
+    <!--        style="@style/MyTabLayout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginHorizontal="10dp"-->
+    <!--        android:layout_marginTop="8dp"-->
+    <!--        android:background="@color/colorPrimaryDark"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.5"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/mainRelLayout"-->
+    <!--        app:tabBackground="@drawable/tab_selector"-->
+    <!--        app:tabGravity="fill"-->
+    <!--        app:tabIndicatorColor="@android:color/transparent"-->
+    <!--        app:tabMode="fixed" />-->
+
+    <!--    <com.demo.incampus.Model.NonSwipeableViewPager-->
+    <!--        android:id="@+id/profileViewPager"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:layout_marginTop="8dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.5"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/tabLayout" />-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".Activity.AboutUsActivity">
+
+    <RelativeLayout
+        android:id="@+id/relLayout"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@drawable/qr_inv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/arrow_dimens"
+            android:layout_height="@dimen/arrow_dimens"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:scaleX="-1"
+            android:src="@drawable/arrow"
+            android:tint="@color/colorPrimaryDark" />
+
+        <TextView
+            android:id="@+id/aboutusTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/topic_margin_start"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/topic_margin_bottom"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="About Us"
+            android:textColor="#000"
+            android:textSize="@dimen/topic_size" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:tint="#c3c3c3"
+        android:src="@drawable/whatisincampus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relLayout" />
+
+    <TextView
+        android:id="@+id/whatisincampus"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:text="What is Incampus"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relLayout" />
+
+    <TextView
+        android:id="@+id/incampuscontent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Incampus is a platform created to connect and create different communities in your campus. It helps to connect people with similar interests so they all can thrive together to become better."
+        android:textAlignment="viewStart"
+        android:textColor="#C3C3C3"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/whatisincampus" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/aboutthefounders"
+        android:tint="#c3c3c3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/incampuscontent" />
+
+    <TextView
+        android:id="@+id/aboutthefounders"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:text="About the Founders"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/incampuscontent" />
+
+    <TextView
+        android:id="@+id/founderscontent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="It is found by a bunch of engineering students who were very passionate to create a platform where they can help the society by helping them to be a part of bigger picture."
+        android:textAlignment="viewStart"
+        android:textColor="#C3C3C3"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aboutthefounders" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="When one door of happiness closes, another opens, but often we look so long at the closed."
+        android:textAlignment="viewStart"
+        android:textColor="#C3C3C3"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/founderscontent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".Activity.UsernameActivity">
+
+    <RelativeLayout
+        android:id="@+id/relLayout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/qr_inv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/cross"
+            android:layout_height="@dimen/cross"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:scaleX="-1"
+            android:src="@drawable/arrow"
+            android:tint="#c3c3c3" />
+
+        <TextView
+            android:id="@+id/usernameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/topic_margin_start"
+            android:layout_marginBottom="@dimen/topic_margin_bottom"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Username"
+            android:textColor="#000"
+            android:textSize="@dimen/topic_size" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:gravity="center"
+        android:text="What would you like to be called?"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relLayout" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="#c3c3c3"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center"
+        android:inputType="textVisiblePassword|textNoSuggestions"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heading" />
+
+    <Button
+        android:id="@+id/continueButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="64dp"
+        android:background="@drawable/roundrect2"
+        android:backgroundTint="@color/colorAccent"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Continue"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

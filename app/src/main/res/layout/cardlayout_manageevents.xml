@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f1f0f2">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="6dp"
+        android:elevation="0dp"
+        app:cardBackgroundColor="#f1f0f2"
+        app:cardCornerRadius="16dp"
+        app:cardMaxElevation="0dp"
+        card_view:cardElevation="0dp">
+
+        <RelativeLayout
+            android:id="@+id/home_relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_cards5">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/event_photo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/bg_image"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:padding="3dp"
+                android:src="@drawable/scene" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="95dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="IOSD"
+                android:textColor="#777777"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name"
+                android:layout_marginStart="95dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Hackathon 2020"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/edit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_cards2"
+                android:backgroundTint="@color/colorPrimary"
+                android:padding="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="delete"
+                android:textColor="#fff" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
