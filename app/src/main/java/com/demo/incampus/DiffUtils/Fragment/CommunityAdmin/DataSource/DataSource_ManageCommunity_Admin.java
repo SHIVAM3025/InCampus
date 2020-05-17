@@ -24,9 +24,9 @@ public class DataSource_ManageCommunity_Admin extends PageKeyedDataSource<Intege
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, Community_Admin_Response.Community_members> callback) {
 
         JsonObject body = new JsonObject();
-
+        int offset = FIRST_PAGE_OFFSET;
         body.addProperty("query", "query MyQuery {\n" +
-                "  Community_members(where: {user_id: {_eq: \"101\"}, _and: {isAdmin: {_eq: true}}}, limit: " + PAGE_SIZE + ", offset: " + FIRST_PAGE_OFFSET + ") {\n" +
+                "  Community_members(where: {user_id: {_eq: \"101\"}, _and: {isAdmin: {_eq: true}}}, limit: " + PAGE_SIZE + ", offset: " + offset + ") {\n" +
                 "    community_to_member_relationship {\n" +
                 "      name\n" +
                 "      pic_url\n" +

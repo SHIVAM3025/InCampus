@@ -15,7 +15,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="15dp"
         app:cardBackgroundColor="#f1f0f2"
-        app:cardCornerRadius="50dp">
+        app:cardCornerRadius="15dp">
 
         <RelativeLayout
             android:id="@+id/home_relativeLayout"
@@ -95,7 +95,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/montserrat_medium"
-                android:text="Anyone up for the basketball game? I will be at the complex around 5pm. Acknowledge if you are coming."
+                android:text=""
                 android:textAlignment="viewStart"
                 android:textColor="#000"
                 android:textSize="16sp" />

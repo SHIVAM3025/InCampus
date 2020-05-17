@@ -59,12 +59,14 @@ public class CreateCommunityAdminAdapter extends PagedListAdapter<Community_Admi
 
         Community_Admin_Response.Community_members posi = getItem(position);
 
-        holder.name.setText(posi.getId());
-       /* holder.followers.setText(posi.getCommunity_to_members_relationship().getMember_count() + " followers");
+        holder.name.setText(posi.getCommunity_to_members_relationship().getName());
+        holder.followers.setText(posi.getCommunity_to_members_relationship().getMember_count() + " followers");
 
-        Glide.with(context)
-                .load(posi.getCommunity_to_members_relationship().getPic_url())
-                .into(holder.profile_photo);
+        if(posi.getCommunity_to_members_relationship().getPic_url()!=null) {
+            Glide.with(context)
+                    .load(posi.getCommunity_to_members_relationship().getPic_url())
+                    .into(holder.profile_photo);
+        }
 
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +76,7 @@ public class CreateCommunityAdminAdapter extends PagedListAdapter<Community_Admi
                 holder.button.setVisibility(View.GONE);
 
             }
-        });*/
+        });
 
     }
 
@@ -83,13 +85,12 @@ public class CreateCommunityAdminAdapter extends PagedListAdapter<Community_Admi
 
         TextView name, followers;
         ImageView profile_photo;
-
         Button button;
 
         CreateCommunityAdminHolder(@NonNull View itemView) {
             super(itemView);
 
-            name = itemView.findViewById(R.id.name);
+            name = itemView.findViewById(R.id.society_name);
             followers = itemView.findViewById(R.id.followers);
             profile_photo = itemView.findViewById(R.id.society_photo);
             button = itemView.findViewById(R.id.button);

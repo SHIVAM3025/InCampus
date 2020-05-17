@@ -25,23 +25,15 @@
         <activity
             android:name=".Activity.UsernameActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login">
-
-
-        </activity>
+            android:theme="@style/Login"></activity>
         <activity
             android:name=".Activity.ManageEventsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login">
-
-        </activity>
+            android:theme="@style/Login"></activity>
         <activity
             android:name=".Activity.ManageCommunityActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login">
-
-
-        </activity>
+            android:theme="@style/Login"></activity>
         <activity
             android:name=".Activity.CreateCommunityActivity"
             android:screenOrientation="portrait"
@@ -57,17 +49,11 @@
         <activity
             android:name=".Activity.CreateEvent_Explore"
             android:screenOrientation="portrait"
-            android:theme="@style/Login">
-
-
-        </activity>
+            android:theme="@style/Login"></activity>
         <activity
             android:name=".Activity.CreatePost_Home"
             android:screenOrientation="portrait"
-            android:theme="@style/Login">
-
-
-        </activity>
+            android:theme="@style/Login"></activity>
         <activity
             android:name=".Activity.SearchActivity"
             android:screenOrientation="portrait"
@@ -87,16 +73,11 @@
         <activity
             android:name=".Activity.ProfileActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login">
-
-        </activity>
+            android:theme="@style/Login"></activity>
         <activity
             android:name=".Activity.ExploreActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login">
-
-
-        </activity>
+            android:theme="@style/Login"></activity>
         <activity
             android:name=".Activity.MessagesActivity"
             android:screenOrientation="portrait"
@@ -104,16 +85,7 @@
         <activity
             android:name=".Activity.HomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-
-        </activity>
+            android:theme="@style/Login"></activity>
         <activity
             android:name=".Activity.StartaNewGroupActivity"
             android:screenOrientation="portrait"
@@ -129,10 +101,7 @@
         <activity
             android:name=".Activity.CategoriesActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login">
-
-
-        </activity>
+            android:theme="@style/Login"></activity>
         <activity
             android:name=".Activity.WalkthroughActivity"
             android:screenOrientation="portrait"
@@ -155,6 +124,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/Login">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
         <activity
             android:name=".Activity.OTPActivity"
@@ -163,9 +138,7 @@
         <activity
             android:name=".Activity.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/SignUp">
-
-        </activity>
+            android:theme="@style/SignUp"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

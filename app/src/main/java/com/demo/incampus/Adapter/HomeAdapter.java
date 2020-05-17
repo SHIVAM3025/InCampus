@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
@@ -122,26 +123,6 @@ public class HomeAdapter extends PagedListAdapter<Post, HomeAdapter.HomeViewHold
             mCtx.startActivity(intent);
         });
 
-  /*      holder.name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(mCtx, PostDetailedActivity.class);
-
-                intent.putExtra("communityName", posi.getCommunityName());
-                intent.putExtra("title", posi.getName());
-                intent.putExtra("userName", posi.getUserName());
-                intent.putExtra("content", posi.getContent());
-                intent.putExtra("time", posi.getCreated_at());
-
-                intent.putExtra("hearts", posi.getUpvotes());
-                intent.putExtra("profileImageUrl", posi.getUserPicUrl());
-
-                mCtx.startActivity(intent);
-
-            }
-        });
-*/
         //click listener for post activity
         holder.content.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,6 +151,12 @@ public class HomeAdapter extends PagedListAdapter<Post, HomeAdapter.HomeViewHold
                 mCtx.startActivity(intent);
             }
         });
+        holder.content.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         //heart
         final boolean[] like = {true};
@@ -195,12 +182,14 @@ public class HomeAdapter extends PagedListAdapter<Post, HomeAdapter.HomeViewHold
 
         ImageView profileImage, downarrow, commentImage, heartImage;
         TextView topic, name, time, content, messages, hearts;
+        CardView mcardView;
 
 
         HomeViewHolder(@NonNull View itemView, final OnPostClickListener onPostClickListener) {
             super(itemView);
 
             profileImage = itemView.findViewById(R.id.profilephoto);
+            mcardView = itemView.findViewById(R.id.cardView);
             topic = itemView.findViewById(R.id.topic);
             name = itemView.findViewById(R.id.user_profile_name);
             time = itemView.findViewById(R.id.time);
@@ -211,7 +200,7 @@ public class HomeAdapter extends PagedListAdapter<Post, HomeAdapter.HomeViewHold
             commentImage = itemView.findViewById(R.id.messages);
             heartImage = itemView.findViewById(R.id.heart);
 
-            itemView.setOnClickListener(v -> {
+            mcardView.setOnClickListener(v -> {
                 if (onPostClickListener != null) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {

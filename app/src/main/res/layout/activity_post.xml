@@ -43,7 +43,6 @@
     </RelativeLayout>
 
 
-    -
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -57,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@id/relLayout">
 
 
-        -
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -79,9 +78,6 @@
                 android:focusableInTouchMode="true"
                 app:cardBackgroundColor="#f1f0f2"
                 app:cardCornerRadius="50dp">
-
-
-                -
 
                 <RelativeLayout
                     android:id="@+id/home_relativeLayout"
@@ -214,7 +210,7 @@
                             android:layout_gravity="center"
                             android:fontFamily="@font/montserrat_semi_bold"
                             android:gravity="center"
-                            android:text="32"
+                            android:text="0"
                             android:textColor="#757575"
                             android:textSize="16sp" />
 

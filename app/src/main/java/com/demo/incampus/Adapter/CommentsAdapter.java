@@ -16,15 +16,25 @@ import com.demo.incampus.DiffUtils.Comments.CommentsResponse.Comment;
 import com.demo.incampus.Model.Comments;
 import com.demo.incampus.R;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class CommentsAdapter extends PagedListAdapter<Comment , CommentsAdapter.CommentsViewHolder >
 {
     private Context context;
+    private long time;
+    private PrettyTime prettyTime;
 
     public CommentsAdapter(Context context) {
         super(diffCallback);
         this.context = context;
+        time = 0;
+        prettyTime = new PrettyTime(Locale.getDefault());
     }
 
     private static DiffUtil.ItemCallback<Comment> diffCallback =
@@ -53,11 +63,20 @@ public class CommentsAdapter extends PagedListAdapter<Comment , CommentsAdapter.
     public void onBindViewHolder(@NonNull CommentsViewHolder holder, int position) {
 
         Comment comment = getItem(position);
+        String[] dd = comment.getTimestamp().split("//.p");
+        time = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
 
         holder.username.setText(comment.getUserName());
-        holder.time.setText(comment.getTimestamp());
         holder.commentText.setText(comment.getContent());
         holder.hearts.setText(comment.getUpvotes());
+
+        try {
+            time = sdf.parse(dd[0]).getTime();
+            holder.time.setText(prettyTime.format(new Date(time)));
+        } catch (ParseException e) {
+            holder.time.setText(prettyTime.format(new Date(time)));
+        }
 
     }
 
