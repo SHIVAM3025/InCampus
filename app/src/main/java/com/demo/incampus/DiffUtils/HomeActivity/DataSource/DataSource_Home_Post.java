@@ -37,6 +37,7 @@ public class DataSource_Home_Post extends PageKeyedDataSource<Integer , Post> {
                         "    pic_url\n" +
                         "    post_id\n" +
                         "    upvotes\n" +
+                        "    no_of_comments\n" +
                         "    post_community {\n" +
                         "      name\n" +
                         "    }\n" +
@@ -82,6 +83,7 @@ public class DataSource_Home_Post extends PageKeyedDataSource<Integer , Post> {
                         "    pic_url\n" +
                         "    post_id\n" +
                         "    upvotes\n" +
+                        "    no_of_comments\n" +
                         "    post_community {\n" +
                         "      name\n" +
                         "    }\n" +
@@ -129,6 +131,7 @@ public class DataSource_Home_Post extends PageKeyedDataSource<Integer , Post> {
                         "    pic_url\n" +
                         "    post_id\n" +
                         "    upvotes\n" +
+                        "    no_of_comments\n" +
                         "    post_community {\n" +
                         "      name\n" +
                         "    }\n" +

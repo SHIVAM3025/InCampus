@@ -275,7 +275,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             intent.putExtra("hearts", post.getUpvotes());
             intent.putExtra("profileImageUrl", post.getUserPicUrl());
-
+            intent.putExtra("postId",post.getPost_id());
             context.startActivity(intent);
             // Log.d(TAG, "onClick: " + position);
         });

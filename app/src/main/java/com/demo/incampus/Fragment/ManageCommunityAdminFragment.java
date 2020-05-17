@@ -42,14 +42,14 @@ public class ManageCommunityAdminFragment extends Fragment {
         recyclerView = view.findViewById(R.id.adminRecyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        UserViewModel_Manage_Community_Admin homeViewModel = ViewModelProviders.of(this).get(UserViewModel_Manage_Community_Admin.class);
+        //UserViewModel_Manage_Community_Admin homeViewModel = ViewModelProviders.of(this).get(UserViewModel_Manage_Community_Admin.class);
 
-        adapter = new CreateCommunityAdminAdapter(getActivity());
+        //adapter = new CreateCommunityAdminAdapter(getActivity());
 
-        homePagedList = homeViewModel.getHomePagedList();
-        homePagedList.observe(getActivity(), homes -> adapter.submitList(homes));
+        //homePagedList = homeViewModel.getHomePagedList();
+        //homePagedList.observe(getActivity(), homes -> adapter.submitList(homes));
 
-        recyclerView.setAdapter(adapter);
+       // recyclerView.setAdapter(adapter);
 
         return view;
 

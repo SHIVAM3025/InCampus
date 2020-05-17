@@ -116,5 +116,4 @@ public class Community_Admin_Response {
     }
 
 
-
 }

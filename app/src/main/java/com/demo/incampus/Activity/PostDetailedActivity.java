@@ -70,7 +70,7 @@ public class PostDetailedActivity extends AppCompatActivity {
     Context context;
 
     int postId;
-    int userId=181;
+    int userId = 181;
 
     int count = 0;
 
@@ -190,7 +190,7 @@ public class PostDetailedActivity extends AppCompatActivity {
                         "    }\n" +
                         "    affected_rows\n" +
                         "  }\n" +
-                        "  update_Posts(where: {post_id: {_eq: \""+ postId +"\"}}, _inc: {no_of_comments: \"1\"}) {\n" +
+                        "  update_Posts(where: {post_id: {_eq: \"" + postId + "\"}}, _inc: {no_of_comments: \"1\"}) {\n" +
                         "    affected_rows\n" +
                         "    returning {\n" +
                         "      no_of_comments\n" +
@@ -204,7 +204,7 @@ public class PostDetailedActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<InsertCommentResponse> call, Response<InsertCommentResponse> response) {
                     String str = "affected rows : " + response.body().getData().getInsert_Comments().getAffected_rows();
-                    Toast.makeText(PostDetailedActivity.this,str,
+                    Toast.makeText(PostDetailedActivity.this, str,
                             Toast.LENGTH_SHORT).show();
 
                     liveDataSource.getValue().invalidate();
@@ -258,19 +258,15 @@ public class PostDetailedActivity extends AppCompatActivity {
         So have i have handled this using a hotfix which is to set the editText text to "" (empty)
          */
 
-        addCommentETV.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                    closeKeyboard();
-                    if (!TextUtils.isEmpty(addCommentETV.getText().toString())) {
-                        addComment();
-                    }
-
-                    return true;
+        addCommentETV.setOnKeyListener((v, keyCode, event) -> {
+            if (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                closeKeyboard();
+                if (!TextUtils.isEmpty(addCommentETV.getText().toString())) {
+                    addComment();
                 }
-                return false;
+                return true;
             }
+            return false;
         });
     }
 
@@ -300,17 +296,16 @@ public class PostDetailedActivity extends AppCompatActivity {
         content = findViewById(R.id.content);
         messages = findViewById(R.id.nmessages);
         hearts = findViewById(R.id.nhearts);
+        recyclerView = findViewById(R.id.commentsRecyclerView);
 
         postImage = findViewById(R.id.postImageView);
         postImage.setVisibility(View.GONE);
 
         commentsTV = findViewById(R.id.commentTextView);
         addCommentETV = findViewById(R.id.yourComment);
-        // recyclerView = findViewById(R.id.commentsRecyclerView);
 
         commentsTV.setVisibility(View.GONE);
         addCommentETV.setVisibility(View.GONE);
-        //recyclerView.setVisibility(View.GONE);
     }
 
     private void setValues() {
@@ -323,7 +318,7 @@ public class PostDetailedActivity extends AppCompatActivity {
         hearts.setText(intent.getStringExtra("hearts"));
 
         String d = intent.getStringExtra("time");
-        if(d!=null) {
+        if (d != null) {
             String[] dd = d.split("//.p");
             long long_time = 0;
             PrettyTime prettyTime;
@@ -336,8 +331,7 @@ public class PostDetailedActivity extends AppCompatActivity {
                 //e.printStackTrace();
                 time.setText("");
             }
-        }else
-        {
+        } else {
             time.setText("");
         }
 
@@ -348,6 +342,8 @@ public class PostDetailedActivity extends AppCompatActivity {
                     .fitCenter()
                     .into(profileImage);
         }
+
+        postId = Integer.parseInt(intent.getStringExtra("postId"));
     }
 
 

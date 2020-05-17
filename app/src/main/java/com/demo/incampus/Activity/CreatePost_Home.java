@@ -145,6 +145,7 @@ public class CreatePost_Home extends AppCompatActivity implements AdapterView.On
                 if(response.isSuccessful())
                 {
                     Log.i("Success",response.body().toString());
+                    Toast.makeText(CreatePost_Home.this, response.body().toString(), Toast.LENGTH_SHORT).show();
                     Intent intent  = new Intent(CreatePost_Home.this , PostCreatedActivity.class);
                     startActivity(intent);
                 }

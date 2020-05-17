@@ -36,7 +36,7 @@ public class CreateCommunityAdminAdapter extends PagedListAdapter<Community_Admi
                 @Override
                 public boolean areItemsTheSame(@NonNull Community_Admin_Response.Community_members oldItem, @NonNull Community_Admin_Response.Community_members newItem) {
                     // Post id will be used to differentiate b/w 2 posts
-                   return oldItem.getId().equals(newItem.getId());
+                    return oldItem.getId().equals(newItem.getId());
                 }
 
                 @Override
@@ -59,12 +59,13 @@ public class CreateCommunityAdminAdapter extends PagedListAdapter<Community_Admi
 
         Community_Admin_Response.Community_members posi = getItem(position);
 
-        holder.name.setText(posi.getCommunity_to_members_relationship().getName());
-       holder.followers.setText(posi.getCommunity_to_members_relationship().getMember_count() + " followers");
+        holder.name.setText(posi.getId());
+       /* holder.followers.setText(posi.getCommunity_to_members_relationship().getMember_count() + " followers");
 
         Glide.with(context)
                 .load(posi.getCommunity_to_members_relationship().getPic_url())
                 .into(holder.profile_photo);
+
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +74,7 @@ public class CreateCommunityAdminAdapter extends PagedListAdapter<Community_Admi
                 holder.button.setVisibility(View.GONE);
 
             }
-        });
+        });*/
 
     }
 

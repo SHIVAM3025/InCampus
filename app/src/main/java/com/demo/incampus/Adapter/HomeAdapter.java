@@ -70,7 +70,7 @@ public class HomeAdapter extends PagedListAdapter<Post, HomeAdapter.HomeViewHold
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mCtx).inflate(R.layout.cardlayout_home, parent, false);
-        return new HomeViewHolder(view , onPostClickListener);
+        return new HomeViewHolder(view, onPostClickListener);
     }
 
     @Override
@@ -88,6 +88,7 @@ public class HomeAdapter extends PagedListAdapter<Post, HomeAdapter.HomeViewHold
         holder.content.setText(posi.getContent());
         // holder.messages.setText(posi.getUpvotes());
         holder.hearts.setText(posi.getUpvotes());
+        holder.messages.setText(posi.getNo_of_comments());
 
         try {
             time = sdf.parse(dd[0]).getTime();
@@ -99,9 +100,6 @@ public class HomeAdapter extends PagedListAdapter<Post, HomeAdapter.HomeViewHold
 
         try {
             if (posi.getUserPicUrl() != null) {
-//                holder.profileImage.setImageDrawable(context.getResources()
-//                        .getDrawable(Integer.parseInt(post.getUserPicUrl())));
-
                 Glide.with(mCtx)
                         .load(posi.getUserPicUrl())
                         .fitCenter()
@@ -115,12 +113,12 @@ public class HomeAdapter extends PagedListAdapter<Post, HomeAdapter.HomeViewHold
         //Click Listener for Profile Activity
         holder.profileImage.setOnClickListener(v -> {
             Intent intent = new Intent(mCtx, ProfileActivity.class);
-            intent.putExtra("user_id" ,posi.getCreated_by());
+            intent.putExtra("user_id", posi.getCreated_by());
             mCtx.startActivity(intent);
         });
         holder.name.setOnClickListener(v -> {
             Intent intent = new Intent(mCtx, ProfileActivity.class);
-            intent.putExtra("user_id" ,posi.getCreated_by());
+            intent.putExtra("user_id", posi.getCreated_by());
             mCtx.startActivity(intent);
         });
 
@@ -199,7 +197,7 @@ public class HomeAdapter extends PagedListAdapter<Post, HomeAdapter.HomeViewHold
         TextView topic, name, time, content, messages, hearts;
 
 
-        HomeViewHolder(@NonNull View itemView , final OnPostClickListener onPostClickListener) {
+        HomeViewHolder(@NonNull View itemView, final OnPostClickListener onPostClickListener) {
             super(itemView);
 
             profileImage = itemView.findViewById(R.id.profilephoto);
@@ -213,14 +211,11 @@ public class HomeAdapter extends PagedListAdapter<Post, HomeAdapter.HomeViewHold
             commentImage = itemView.findViewById(R.id.messages);
             heartImage = itemView.findViewById(R.id.heart);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(onPostClickListener !=null) {
-                        int position = getAdapterPosition();
-                        if (position!=RecyclerView.NO_POSITION) {
-                            onPostClickListener.onPostClick(position);
-                        }
+            itemView.setOnClickListener(v -> {
+                if (onPostClickListener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        onPostClickListener.onPostClick(position);
                     }
                 }
             });

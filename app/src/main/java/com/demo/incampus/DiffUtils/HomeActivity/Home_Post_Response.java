@@ -28,13 +28,14 @@ public class Home_Post_Response {
         private String name;
         private String pic_url;
         private String upvotes;
+        private String no_of_comments;
 
         private PostCommunity post_community;
         private PostToUser post_to_user;
 
         public Post(String post_id, String community_id, String content, String created_at,
                     String created_by, String name, String pic_url, String upvotes,
-                    PostCommunity post_community, PostToUser post_to_user) {
+                    String no_of_comments, PostCommunity post_community, PostToUser post_to_user) {
             this.post_id = post_id;
             this.community_id = community_id;
             this.content = content;
@@ -43,6 +44,7 @@ public class Home_Post_Response {
             this.name = name;
             this.pic_url = pic_url;
             this.upvotes = upvotes;
+            this.no_of_comments = no_of_comments;
             this.post_community = post_community;
             this.post_to_user = post_to_user;
         }
@@ -77,6 +79,10 @@ public class Home_Post_Response {
 
         public String getUpvotes() {
             return upvotes;
+        }
+
+        public String getNo_of_comments() {
+            return no_of_comments;
         }
 
         public PostCommunity getPost_community() {
@@ -117,6 +123,7 @@ public class Home_Post_Response {
                     Objects.equals(getName(), post.getName()) &&
                     Objects.equals(getPic_url(), post.getPic_url()) &&
                     Objects.equals(getUpvotes(), post.getUpvotes()) &&
+                    Objects.equals(getNo_of_comments(), post.getNo_of_comments()) &&
                     Objects.equals(getPost_community(), post.getPost_community()) &&
                     Objects.equals(getPost_to_user(), post.getPost_to_user());
         }
