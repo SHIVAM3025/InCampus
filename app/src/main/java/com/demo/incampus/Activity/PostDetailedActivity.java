@@ -37,7 +37,6 @@ public class PostDetailedActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     CommentsAdapter adapter;
     ArrayList<Comments> commentsArrayList;
-
     ImageView profileImage, downArrow;
     TextView topic, name, time, content, messages, hearts;
 
