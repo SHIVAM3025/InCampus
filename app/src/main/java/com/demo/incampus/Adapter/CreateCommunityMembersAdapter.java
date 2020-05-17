@@ -4,8 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.paging.PagedListAdapter;
@@ -60,6 +62,16 @@ public class CreateCommunityMembersAdapter extends PagedListAdapter<Community_Me
                 .load(posi.getCommunity_to_members_relationship().getPic_url())
                 .into(holder.profile_photo);
 
+        holder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(context, "Remove Function", Toast.LENGTH_SHORT).show();
+                holder.button.setVisibility(View.GONE);
+
+            }
+        });
+
     }
 
 
@@ -67,6 +79,7 @@ public class CreateCommunityMembersAdapter extends PagedListAdapter<Community_Me
 
         TextView name, followers;
         ImageView profile_photo;
+        Button button;
 
         CreateCommunityMemberHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,7 +87,7 @@ public class CreateCommunityMembersAdapter extends PagedListAdapter<Community_Me
             name = itemView.findViewById(R.id.name);
             followers = itemView.findViewById(R.id.followers);
             profile_photo = itemView.findViewById(R.id.profile_photo);
-
+            button = itemView.findViewById(R.id.button);
 
         }
 

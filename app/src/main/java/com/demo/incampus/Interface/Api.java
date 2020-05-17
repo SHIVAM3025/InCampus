@@ -1,6 +1,7 @@
 package com.demo.incampus.Interface;
 
 import com.demo.incampus.DiffUtils.Categories.Data_Categories;
+import com.demo.incampus.DiffUtils.Comments.CommentsResponse;
 import com.demo.incampus.DiffUtils.Explore.Explore_Event_Response;
 import com.demo.incampus.DiffUtils.Fragment.CommunityAdmin.Community_Admin_Response;
 import com.demo.incampus.DiffUtils.Fragment.CommunityMembers.Community_Members_Response;
@@ -129,6 +130,9 @@ public interface Api {
 
     @POST("graphql/")
     Call<Community_Members_Response> getManageCommunity_Members(@Body JsonObject body);
+
+    @POST("graphql/")
+    Call<CommentsResponse> getCommentsOnPost(@Body JsonObject body);
 
 }
 
