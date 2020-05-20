@@ -54,7 +54,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
 
     int RC_SIGN_IN=0,RC_GET_AUTH_CODE=0;
 
-    String serverClientId="812077473460-pvbqdjirafrelcard0ni1ao02r3dde8r.apps.googleusercontent.com";
+    String serverClientId="678341947476-kri1kouc8pite5hnlpefi794rtmagan7.apps.googleusercontent.com";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //if the system api is below marshmallow, set status bar to default black
@@ -151,8 +151,8 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestScopes(new Scope(Scopes.DRIVE_APPFOLDER))
                 .requestServerAuthCode(serverClientId)
+                .requestIdToken(serverClientId)
                 .requestEmail()
                 .build();
         // Build a GoogleSignInClient with the options specified by gso.
@@ -282,6 +282,8 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 GoogleSignInAccount acct = result.getSignInAccount();
                 String authCode = acct.getServerAuthCode();
                 String idTokenString = acct.getIdToken();
+
+                Toast.makeText(this, idTokenString + "tgr", Toast.LENGTH_SHORT).show();
 
                 // Show signed-in UI.
                 Log.i("Auth: ",authCode);

@@ -45,19 +45,16 @@ public class CreateCommunityActivity extends AppCompatActivity implements Adapte
 
         //upload cover photo
         uploadPhotoButton = findViewById(R.id.uploadCoverPhoto);
-        uploadPhotoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
-                        requestPermissions(permissions, 1001);
-                    } else {
-                        pickImagefromGallery();
-                    }
+        uploadPhotoButton.setOnClickListener(v -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                    String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+                    requestPermissions(permissions, 1001);
                 } else {
                     pickImagefromGallery();
                 }
+            } else {
+                pickImagefromGallery();
             }
         });
 
@@ -105,16 +102,13 @@ public class CreateCommunityActivity extends AppCompatActivity implements Adapte
 
         //create event button listener
         Button createEventButton = findViewById(R.id.createCommunityButton);
-        createEventButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!flag) {
-                    Toast.makeText(CreateCommunityActivity.this, "Please Upload a Cover Photo", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(CreateCommunityActivity.this, "Community Created", Toast.LENGTH_SHORT).show();
-                }
-
+        createEventButton.setOnClickListener(v -> {
+            if (!flag) {
+                Toast.makeText(CreateCommunityActivity.this, "Please Upload a Cover Photo", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(CreateCommunityActivity.this, "Community Created", Toast.LENGTH_SHORT).show();
             }
+
         });
     }
 

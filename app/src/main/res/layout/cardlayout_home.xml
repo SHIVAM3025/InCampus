@@ -11,11 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="7dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="15dp"
-        app:cardBackgroundColor="#f1f0f2"
-        app:cardCornerRadius="15dp">
+        android:layout_marginBottom="7dp"
+        app:cardCornerRadius="40dp"
+        app:cardElevation="0dp">
 
         <RelativeLayout
             android:id="@+id/home_relativeLayout"
@@ -30,8 +30,8 @@
                 android:layout_height="60dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="35dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
                 android:src="@color/colorPrimary" />
 
             <TextView
@@ -40,11 +40,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="112dp"
+                android:layout_marginStart="105dp"
                 android:layout_marginTop="25dp"
                 android:fontFamily="@font/montserrat_semi_bold"
                 android:text="Basketball"
-                android:textColor="#000"
+                android:textColor="#B3000000"
                 android:textSize="14sp" />
 
             <TextView
@@ -53,12 +53,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/topic"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="112dp"
-                android:layout_marginTop="2dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="jain_preyesh"
-                android:textColor="#000"
-                android:textSize="20sp" />
+                android:layout_marginStart="105dp"
+                android:layout_marginTop="0dp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:text="moin"
+                android:textColor="#E6000000"
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/time"
@@ -66,21 +66,21 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/user_profile_name"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="112dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginStart="105dp"
+                android:layout_marginTop="3dp"
                 android:fontFamily="@font/montserrat_medium"
-                android:text="1 hour ago"
+                android:text="7 hour ago"
                 android:textColor="#000"
-                android:textSize="14sp" />
+                android:textSize="10sp" />
 
             <ImageView
                 android:id="@+id/downarrow"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="60dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginTop="34dp"
+                android:layout_marginEnd="34dp"
                 android:tint="#757575"
                 app:srcCompat="@drawable/arrow_down" />
 
@@ -95,7 +95,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/montserrat_medium"
-                android:text=""
+                android:text="Hello My name is Shivam and someone's name is Vaibhav"
                 android:textAlignment="viewStart"
                 android:textColor="#000"
                 android:textSize="16sp" />
@@ -117,8 +117,8 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/montserrat_semi_bold"
                     android:gravity="center"
-                    android:text="-"
-                    android:textColor="#757575"
+                    android:text=""
+                    android:textColor="#817889"
                     android:textSize="16sp" />
 
                 <Space
@@ -143,8 +143,8 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/montserrat_semi_bold"
                     android:gravity="center"
-                    android:text="40"
-                    android:textColor="#757575"
+                    android:text=""
+                    android:textColor="#817889"
                     android:textSize="16sp" />
 
                 <Space
@@ -156,6 +156,7 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     app:srcCompat="@drawable/heart" />
+
             </LinearLayout>
 
         </RelativeLayout>

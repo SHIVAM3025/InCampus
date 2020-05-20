@@ -58,7 +58,7 @@ public class OTPActivity extends AppCompatActivity {
         setContentView(R.layout.activity_otp);
 
         //Linear Layout covering the amount of screen
-        LinearLayout RL = findViewById(R.id.linLayout);
+        LinearLayout RL = findViewById(R.id.numberlayout);
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -211,7 +211,8 @@ public class OTPActivity extends AppCompatActivity {
     public void API_POST_receive_OTP(String phoneNumber) {
         //API CALL RECEIVE OTP
         Toast.makeText(this, jwt_token, Toast.LENGTH_SHORT).show();
-        String token = "Bearer " + jwt_token;
+
+        String token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwNCIsImlhdCI6MTU4OTk2MDM5MH0.-biRlMwX8UHOVLrXFnPesZA3GesCx87gy7PsvTHbBYo";
         Call<Phone> otpReceive = RetrofitClient.getInstance().getApi().otpReceive(token, phoneNumber);
         otpReceive.enqueue(new Callback<Phone>() {
             @Override
@@ -228,26 +229,12 @@ public class OTPActivity extends AppCompatActivity {
                         Toast.makeText(OTPActivity.this, "Response is not sucesful", Toast.LENGTH_SHORT).show();
                     }
 
-
-                    /*
-                    String s = response.body().string();
-                    Log.i("response", s);
-
-                    // Toast.makeText(OTPJava.this, "JOKER", Toast.LENGTH_SHORT).show();
-
-                    JSONObject jsonObject = new JSONObject();
-                    sessionID = jsonObject.getString("Details");
-
-                    Intent intent = new Intent(OTPJava.this , Walkthrough.class);
-                    startActivity(intent);*/
-
                     Log.i("sessionID", sessionID);
                 } catch (Exception e) {
                     if (e instanceof NullPointerException) {
                         Toast.makeText(OTPActivity.this, "Excenption = >  " + e.getMessage(), Toast.LENGTH_SHORT).show();
 
                     } else {
-
 
                     }
                 }
@@ -269,8 +256,6 @@ public class OTPActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    //String s = response.body().string();
-                    //  Log.i("verification", s);
 
                     Intent intent = new Intent(OTPActivity.this, WalkthroughActivity.class);
                     startActivity(intent);

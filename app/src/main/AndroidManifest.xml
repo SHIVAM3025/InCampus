@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
     <uses-permission
@@ -37,7 +37,9 @@
         <activity
             android:name=".Activity.CreateCommunityActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login" />
+            android:theme="@style/Login">
+
+        </activity>
         <activity
             android:name=".Activity.PostCreatedActivity"
             android:screenOrientation="portrait"
@@ -93,7 +95,8 @@
         <activity
             android:name=".Activity.PhoneNumberActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login" />
+            android:theme="@style/Login">
+        </activity>
         <activity
             android:name=".Activity.SuccessGroupCreate"
             android:screenOrientation="portrait"
@@ -117,28 +120,34 @@
         <activity
             android:name=".Activity.SignInActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login" /> <!-- android:windowSoftInputMode="adjustResize" -->
-        <activity
-            android:name=".Activity.InfoActivity"
-            android:noHistory="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Login">
-
+            android:theme="@style/Login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+        </activity> <!-- android:windowSoftInputMode="adjustResize" -->
+        <activity
+            android:name=".Activity.InfoActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Login">
+
+
         </activity>
         <activity
             android:name=".Activity.OTPActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Login" />
+
         <activity
             android:name=".Activity.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/SignUp"></activity>
+            android:theme="@style/SignUp">
+
+
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

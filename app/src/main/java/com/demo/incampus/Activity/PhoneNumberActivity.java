@@ -91,6 +91,7 @@ public class PhoneNumberActivity extends AppCompatActivity {
     public void verify(View view) {
         if (number.getText().length() == 14) {
             phoneNumber = number.getText().toString();
+            phoneNumber=phoneNumber.replaceAll("\\s", "");
             Intent intent = new Intent(this, OTPActivity.class);
             intent.putExtra("phoneNumber", phoneNumber);
             startActivity(intent);

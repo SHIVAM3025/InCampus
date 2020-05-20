@@ -2,7 +2,9 @@ package com.demo.incampus.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -19,5 +21,8 @@ public class SearchActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_search);
+        float dip = 14f;
+       // float px = TypedValue.applyDimension(     TypedValue.COMPLEX_UNIT_DIP,     dip,     Resources.getDisplayMetrics() );
+
     }
 }
