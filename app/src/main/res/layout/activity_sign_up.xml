@@ -138,7 +138,6 @@
         android:id="@+id/contd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:background="@drawable/qr"
         android:backgroundTint="@android:color/background_light"
         android:fontFamily="@font/montserrat_semi_bold"

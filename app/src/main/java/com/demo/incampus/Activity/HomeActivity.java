@@ -263,7 +263,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void setOnClickListener() {
-        homeAdapter.setOnPostClickListener(position -> {
+        homeAdapter.setOnPostClickListener(position ->  {
             Intent intent = new Intent(context, PostDetailedActivity.class);
 
             Post post = homePagedList.getValue().snapshot().get(position);

@@ -1,5 +1,7 @@
 package com.demo.incampus.Activity;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
@@ -34,6 +36,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import okhttp3.ResponseBody;
@@ -46,15 +49,15 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
     Boolean pwd_vis = false;
 
     GoogleSignInClient mGoogleSignInClient;
-    GoogleApiClient mGoogleApiClient;
     SignInButton signInButtonGoogle;
     String authCode;
 
-    int RC_SIGN_IN = 0, RC_GET_AUTH_CODE = 0;
+    int RC_SIGN_IN = 0;
 
     EditText email, password, username;
 
     String serverClientId = "678341947476-kri1kouc8pite5hnlpefi794rtmagan7.apps.googleusercontent.com";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,11 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
         username = findViewById(R.id.username);
 
         Button signin2 = findViewById(R.id.signin2);
+        signInButtonGoogle = findViewById(R.id.login_ggl);
+
+        AccountManager am = AccountManager.get(this); // "this" references the current Context
+
+        Account[] accounts = am.getAccountsByType("com.google");
 
         final SharedPreferences preferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
 
@@ -174,7 +182,7 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
 
 
         /*_______________________________________START_GOOGLE____________________________________________*/
-        signInButtonGoogle = findViewById(R.id.login_ggl);
+
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -185,23 +193,48 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
 
-        signInButtonGoogle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()) {
-                    case R.id.login_ggl:
-                        signIn();
-                        break;
-                    // ...
+        //GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
-                }
-            }
-        });
+
+        //START
+//        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+//        if (GoogleSignIn.hasPermissions(account, gso.getScopeArray())) {
+//            // Already signed in.
+//            // The signed in account is stored in the 'account' variable.
+//            GoogleSignInAccount signedInAccount = account;
+//            Toast.makeText(this, signedInAccount.getIdToken(), Toast.LENGTH_SHORT).show();
+//        }
+
+//        } else {
+//            // Haven't been signed-in before. Try the silent sign-in first.
+//            GoogleSignInClient signInClient = GoogleSignIn.getClient(this, gso);
+//            signInClient
+//                    .silentSignIn()
+//                    .addOnCompleteListener(
+//                            this,
+//                            task -> {
+//                                if (task.isSuccessful()) {
+//                                    // The signed in account is stored in the task's result.
+//                                    GoogleSignInAccount signedInAccount = task.getResult();
+//                                    Toast.makeText(SignUpActivity.this, "SignEd In", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(SignUpActivity.this, signedInAccount.getIdToken(), Toast.LENGTH_SHORT).show();
+//                                } else {
+//                                    // Player will need to sign-in explicitly using via UI.
+//                                    // See [sign-in best practices](http://developers.google.com/games/services/checklist) for guidance on how and when to implement Interactive Sign-in,
+//                                    // and [Performing Interactive Sign-in](http://developers.google.com/games/services/android/signin#performing_interactive_sign-in) for details on how to implement
+//                                    // Interactive Sign-in.
+//                                }
+//                            });
+//
+//        }
+
+        //FINISH
+
+
+        signInButtonGoogle.setOnClickListener(v -> signIn());
+
+
         /*__________________________________________END_GOOGLE______________________________________________*/
 
 
@@ -223,34 +256,9 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
-        Log.i("function", "inside sign in");
     }
 
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
-            // Signed in successfully, show authenticated UI.
-
-            API_POST_google_auth_response(account.getIdToken());
-            Log.i("Token", account.getIdToken());
-            Log.i("function", "inside handle sign in result");
-            //Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
-        } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w("Error:", "signInResult:failed code=" + e.getStatusCode());
-        }
-    }
-
-    private void getAuthCode() {
-        // Start the retrieval process for a server auth code.  If requested, ask for a refresh
-        // token.  Otherwise, only get an access token if a refresh token has been previously
-        // retrieved.  Getting a new access token for an existing grant does not require
-        // user consent.
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, RC_GET_AUTH_CODE);
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -262,35 +270,55 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
             // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
-            Log.i("Request", "request code is rc sign in");
         }
 
-        if (requestCode == RC_GET_AUTH_CODE) {
-            SharedPreferences preferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-            final SharedPreferences.Editor editor = preferences.edit();
+//        if (requestCode == RC_GET_AUTH_CODE) {
+//            SharedPreferences preferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+//            final SharedPreferences.Editor editor = preferences.edit();
+//
+//            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+//            Log.d("Success: ", "onActivityResult:GET_AUTH_CODE:success:" + result.getStatus().isSuccess());
+//            Log.i("Request", "request code is rc auth code");
+//            if (result.isSuccess()) {
+//                // [START get_auth_code]
+//                GoogleSignInAccount acct = result.getSignInAccount();
+//                authCode = acct.getServerAuthCode();
+//                String idTokenString = acct.getIdToken();
+//
+//                Toast.makeText(this, idTokenString , Toast.LENGTH_SHORT).show();
+//                // Show signed-in UI.
+//                Log.i("Auth: ", authCode);
+//                //STORING IN SHARED PREFERENCES GOOGLE AUTH CODE
+//                editor.putString("Auth", authCode);
+//                editor.commit();
+//                // TODO(user): send code to server and exchange for access/refresh/ID tokens.
+//                // [END get_auth_code]
+//                Log.i("Request", "rc auth code has success result");
+//               // API_POST_google_auth_response(idTokenString);
+//            }
+//        }
 
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            Log.d("Success: ", "onActivityResult:GET_AUTH_CODE:success:" + result.getStatus().isSuccess());
-            Log.i("Request", "request code is rc auth code");
-            if (result.isSuccess()) {
-                // [START get_auth_code]
-                GoogleSignInAccount acct = result.getSignInAccount();
-                authCode = acct.getServerAuthCode();
-                String idTokenString = acct.getIdToken();
+    }
 
-                Toast.makeText(this, idTokenString + "tgr", Toast.LENGTH_SHORT).show();
-                // Show signed-in UI.
-                Log.i("Auth: ", authCode);
-                //STORING IN SHARED PREFERENCES GOOGLE AUTH CODE
-                editor.putString("Auth", authCode);
-                editor.commit();
-                // TODO(user): send code to server and exchange for access/refresh/ID tokens.
-                // [END get_auth_code]
-                Log.i("Request", "rc auth code has success result");
-                API_POST_google_auth_response(idTokenString);
-            }
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+
+            // Signed in successfully, show authenticated UI.
+            Toast.makeText(this, account.getIdToken(), Toast.LENGTH_SHORT).show();
+            //API_POST_google_auth_response(account.getIdToken());
+            Log.i("Token", account.getIdToken());
+            Log.i("function", "inside handle sign in result");
+            Toast.makeText(this, "Username", Toast.LENGTH_SHORT).show();
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w("Error:", "signInResult:failed code=" + e.getStatusCode());
         }
     }
+
+
+
     /*__________________________________________END_GOOGLE______________________________________________*/
 
     public void API_POST_register_user(String personEmail, String personGivenName, String personPassword) {
@@ -345,7 +373,7 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
                         ResponseBody s = response.body();
                         editor.putString("JWT", s.string());
                         editor.commit();
-                        Toast.makeText(SignUpActivity.this, "rgf", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, "lion", Toast.LENGTH_SHORT).show();
 
                         Intent i = new Intent(SignUpActivity.this, PhoneNumberActivity.class);
                         startActivity(i);

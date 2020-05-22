@@ -37,13 +37,14 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.tasks.Task;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     GoogleSignInClient mGoogleSignInClient;
-    GoogleApiClient mGoogleApiClient;
+    //GoogleApiClient mGoogleApiClient;
     SignInButton signInButtonGoogle;
 
     private EditText email , password;
@@ -153,15 +154,17 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestServerAuthCode(serverClientId)
                 .requestIdToken(serverClientId)
+                //.requestScopes()
                 .requestEmail()
                 .build();
+
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this,this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+//        mGoogleApiClient = new GoogleApiClient.Builder(this)
+//                .enableAutoManage(this,this)
+//                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+//                .build();
 
         signInButtonGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,44 +221,13 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
-            // Signed in successfully, show authenticated UI.
-            Intent i=new Intent(this,PhoneNumberActivity.class);
-            startActivity(i);
-        } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w("Error:", "signInResult:failed code=" + e.getStatusCode());
-        }
-    }
-
-    private void getAuthCode() {
-        // Start the retrieval process for a server auth code.  If requested, ask for a refresh
-        // token.  Otherwise, only get an access token if a refresh token has been previously
-        // retrieved.  Getting a new access token for an existing grant does not require
-        // user consent.
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, RC_GET_AUTH_CODE);
-    }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
     }
 
-    /*
-    @Override
-    protected void onStart() {
-        super.onStart();
-        // Check for existing Google Sign In account, if the user is already signed in
-        // the GoogleSignInAccount will be non-null.
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        Intent i=new Intent(this,OTP.class);
-        startActivity(i);
-    }
-    */
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -269,31 +241,52 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
             handleSignInResult(task);
         }
 
-        if(requestCode==RC_GET_AUTH_CODE)
-        {
-            SharedPreferences preferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-            final SharedPreferences.Editor editor = preferences.edit();
+//        if(requestCode==RC_GET_AUTH_CODE)
+//        {
+//            SharedPreferences preferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+//            final SharedPreferences.Editor editor = preferences.edit();
+//
+//            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+//            Log.d("Success: ", "onActivityResult:GET_AUTH_CODE:success:" + result.getStatus().isSuccess());
+//
+//            if (result.isSuccess()) {
+//                // [START get_auth_code]
+//                GoogleSignInAccount acct = result.getSignInAccount();
+//                String authCode = acct.getServerAuthCode();
+//                String idTokenString = acct.getIdToken();
+//
+//                // Show signed-in UI.
+//                Log.i("Auth: ",authCode);
+//
+//                //STORING IN SHARED PREFERENCES GOOGLE AUTH CODE
+//                editor.putString("Auth", authCode );
+//                editor.commit();
+//                API_POST_google_auth_response(idTokenString);
+//                // TODO(user): send code to server and exchange for access/refresh/ID tokens.
+//                // [END get_auth_code]
+//            }
+     //   }
+    }
 
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            Log.d("Success: ", "onActivityResult:GET_AUTH_CODE:success:" + result.getStatus().isSuccess());
+    private void handleSignInResult(Task<GoogleSignInAccount> task) {
 
-            if (result.isSuccess()) {
-                // [START get_auth_code]
-                GoogleSignInAccount acct = result.getSignInAccount();
-                String authCode = acct.getServerAuthCode();
-                String idTokenString = acct.getIdToken();
+        try {
+            GoogleSignInAccount account = task.getResult(ApiException.class);
 
-                Toast.makeText(this, idTokenString + "tgr", Toast.LENGTH_SHORT).show();
+            // Signed in successfully, show authenticated UI.
+            Toast.makeText(this, account.getIdToken(), Toast.LENGTH_SHORT).show();
+            //API_POST_google_auth_response(account.getIdToken());
+            Log.i("Token", account.getIdToken());
 
-                // Show signed-in UI.
-                Log.i("Auth: ",authCode);
+            email.setText(account.getIdToken());
 
-                //STORING IN SHARED PREFERENCES GOOGLE AUTH CODE
-                editor.putString("Auth", authCode );
-                editor.commit();
-                // TODO(user): send code to server and exchange for access/refresh/ID tokens.
-                // [END get_auth_code]
-            }
+            Toast.makeText(this, "No Username", Toast.LENGTH_SHORT).show();
+            Log.i("function", "inside handle sign in result");
+            //Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w("Error:", "signInResult:failed code=" + e.getStatusCode());
         }
     }
 
@@ -356,65 +349,47 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
 
             }
         });
+    }
 
+    public void API_POST_google_auth_response(String id_token) {
+        Toast.makeText(this, "called google auth", Toast.LENGTH_SHORT).show();
+        SharedPreferences preferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = preferences.edit();
 
-        //API POST LOGIN USER
-        /*
-        Call<ResponseBody> login=RetrofitClient.getInstance().getApi().login("rajatmw1999","password");
-        login.enqueue(new Callback<ResponseBody>() {
+        //API POST REGISTER
+        retrofit2.Call<ResponseBody> register = RetrofitClient.getInstance().getApi().google_id_token(id_token);
+        register.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(retrofit2.Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 try {
-                    if(response.isSuccessful())
-                    {
+                    if (response.isSuccessful()) {
+                        ResponseBody s = response.body();
+                        editor.putString("JWT", s.string());
+                        editor.commit();
+                        Toast.makeText(SignInActivity.this, "rgf", Toast.LENGTH_SHORT).show();
 
-
-                        ResponseBody register = response.body();
-
-                        Toast.makeText(SignInJava.this,register.string() ,Toast.LENGTH_SHORT).show();
-
-
-                    }else
-                    {
-                        Toast.makeText(SignInJava.this, "Response is not Successful !!", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(SignInActivity.this, PhoneNumberActivity.class);
+                        startActivity(i);
+                        Log.i("response", "Got response from user");
+                    } else {
+                        Toast.makeText(SignInActivity.this, "Service unavailable", Toast.LENGTH_SHORT).show();
                     }
-
-                }catch(Exception e)
-                {
-                    Toast.makeText(SignInJava.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-                try {
-
-
-                    ResponseBody responseBody = response.body();
-
-                    String dds= responseBody.string();
-
-                    JSONObject jsonObject=new JSONObject(dds);
-
-                    Toast.makeText(SignInJava.this, dds, Toast.LENGTH_SHORT).show();
-                    jwt_token = jsonObject.getString("accessToken");
-
-                    editor.putString("JWT", jwt_token);
-
-                    Log.i("access Token Server:",jwt_token);
-
-                } catch (IOException | JSONException e) {
-
-                    mcontinue.setEnabled(true);
-                    if( e instanceof NullPointerException){
-                        Toast.makeText(SignInJava.this, "Username does not exist", Toast.LENGTH_SHORT).show();
-                    }else{
-                    Toast.makeText(SignInJava.this, e.getMessage(), Toast.LENGTH_SHORT).show();}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(SignInActivity.this, "User already registered!", Toast.LENGTH_SHORT).show();
+                    Log.i("No response", "exception");
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Toast.makeText(SignInActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.i("Info", "No SignInActivity for register user post");
             }
 
-        });  */
+        });
     }
+
+
 }

@@ -442,7 +442,7 @@
         <item>Some Notifications</item>
         <item>No Notifications</item>
     </string-array>
-        <!-- TODO delete this data-->
+    <!-- TODO delete this data-->
     <string-array name="communities">
         <item>ECELL</item>
         <item>KALAKRITI</item>

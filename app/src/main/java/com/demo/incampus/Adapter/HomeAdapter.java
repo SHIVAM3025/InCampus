@@ -78,7 +78,6 @@ public class HomeAdapter extends PagedListAdapter<Post, HomeAdapter.HomeViewHold
     public void onBindViewHolder(@NonNull final HomeViewHolder holder, int position) {
 
         Post posi = getItem(position);
-
         String d = posi.getCreated_at();
         String[] dd = d.split("//.p");
         time = 0;
@@ -86,9 +85,19 @@ public class HomeAdapter extends PagedListAdapter<Post, HomeAdapter.HomeViewHold
         holder.topic.setText(posi.getCommunityName());
         holder.name.setText(posi.getUserName());
         holder.time.setText(posi.getCreated_at());
-        holder.content.setText(posi.getContent());
+      //  holder.content.setText(posi.getUser_idList().toString());
+
+        if(posi.getUser_idList() == null)
+        {
+               // holder.heartImage.setImageResource(R.drawable.heart2);
+                holder.content.setText("HELLO");
+        }else {
+
+            holder.content.setText("JOKER");
+        }
+
         // holder.messages.setText(posi.getUpvotes());
-        holder.hearts.setText(posi.getUpvotes());
+        holder.hearts.setText(posi.getPostUpvotesByPostId_aggregate().getAggregate().getCount());
         holder.messages.setText(posi.getNo_of_comments());
 
         try {
@@ -200,7 +209,7 @@ public class HomeAdapter extends PagedListAdapter<Post, HomeAdapter.HomeViewHold
             commentImage = itemView.findViewById(R.id.messages);
             heartImage = itemView.findViewById(R.id.heart);
 
-            mcardView.setOnClickListener(v -> {
+            itemView.setOnClickListener(v -> {
                 if (onPostClickListener != null) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {

@@ -4,6 +4,7 @@ import com.demo.incampus.CommonGraphqlModels.CommentCountResponse;
 import com.demo.incampus.CommonGraphqlModels.InsertCommentResponse;
 import com.demo.incampus.DiffUtils.Categories.Data_Categories;
 import com.demo.incampus.DiffUtils.Comments.CommentsResponse;
+import com.demo.incampus.DiffUtils.CommunityProfile.Community_Profile_Response;
 import com.demo.incampus.DiffUtils.Explore.Explore_Event_Response;
 import com.demo.incampus.DiffUtils.Fragment.CommunityAdmin.Community_Admin_Response;
 import com.demo.incampus.DiffUtils.Fragment.CommunityMembers.Community_Members_Response;
@@ -141,6 +142,9 @@ public interface Api {
 
     @POST("graphql")
     Call<CommentCountResponse> getCommentCount(@Body JsonObject body);
+
+    @POST("grphql/")
+    Call<Community_Profile_Response> getCommunityProfile(@Body JsonObject body);
 
 }
 

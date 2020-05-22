@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" /> <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
     <uses-permission
@@ -22,24 +22,37 @@
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity"
         tools:replace="android:allowBackup">
+
         <activity
-            android:name=".Activity.UsernameActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Login"></activity>
-        <activity
-            android:name=".Activity.ManageEventsActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Login"></activity>
-        <activity
-            android:name=".Activity.ManageCommunityActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Login"></activity>
-        <activity
-            android:name=".Activity.CreateCommunityActivity"
+            android:name=".Activity.CommunityProfileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Login">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
+
+
+        <activity
+            android:name=".Activity.UsernameActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Login" />
+        <activity
+            android:name=".Activity.ManageEventsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Login" />
+        <activity
+            android:name=".Activity.ManageCommunityActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Login" />
+        <activity
+            android:name=".Activity.CreateCommunityActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Login"></activity>
         <activity
             android:name=".Activity.PostCreatedActivity"
             android:screenOrientation="portrait"
@@ -51,11 +64,11 @@
         <activity
             android:name=".Activity.CreateEvent_Explore"
             android:screenOrientation="portrait"
-            android:theme="@style/Login"></activity>
+            android:theme="@style/Login" />
         <activity
             android:name=".Activity.CreatePost_Home"
             android:screenOrientation="portrait"
-            android:theme="@style/Login"></activity>
+            android:theme="@style/Login" />
         <activity
             android:name=".Activity.SearchActivity"
             android:screenOrientation="portrait"
@@ -75,11 +88,11 @@
         <activity
             android:name=".Activity.ProfileActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login"></activity>
+            android:theme="@style/Login" />
         <activity
             android:name=".Activity.ExploreActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login"></activity>
+            android:theme="@style/Login" />
         <activity
             android:name=".Activity.MessagesActivity"
             android:screenOrientation="portrait"
@@ -87,7 +100,8 @@
         <activity
             android:name=".Activity.HomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login"></activity>
+            android:theme="@style/Login">
+        </activity>
         <activity
             android:name=".Activity.StartaNewGroupActivity"
             android:screenOrientation="portrait"
@@ -95,8 +109,7 @@
         <activity
             android:name=".Activity.PhoneNumberActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login">
-        </activity>
+            android:theme="@style/Login"></activity>
         <activity
             android:name=".Activity.SuccessGroupCreate"
             android:screenOrientation="portrait"
@@ -104,7 +117,7 @@
         <activity
             android:name=".Activity.CategoriesActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login"></activity>
+            android:theme="@style/Login" />
         <activity
             android:name=".Activity.WalkthroughActivity"
             android:screenOrientation="portrait"
@@ -120,34 +133,22 @@
         <activity
             android:name=".Activity.SignInActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:theme="@style/Login">
 
         </activity> <!-- android:windowSoftInputMode="adjustResize" -->
         <activity
             android:name=".Activity.InfoActivity"
             android:noHistory="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Login">
-
-
-        </activity>
+            android:theme="@style/Login"></activity>
         <activity
             android:name=".Activity.OTPActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Login" />
-
         <activity
             android:name=".Activity.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/SignUp">
-
-
-        </activity>
+            android:theme="@style/SignUp"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

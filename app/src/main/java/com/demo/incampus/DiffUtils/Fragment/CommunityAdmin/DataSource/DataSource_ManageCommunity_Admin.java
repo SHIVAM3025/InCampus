@@ -33,6 +33,7 @@ public class DataSource_ManageCommunity_Admin extends PageKeyedDataSource<Intege
                 "      member_count\n" +
                 "    }\n" +
                 "    id\n" +
+                "    community_id\n" +
                 "  }\n" +
                 "}\n");
 

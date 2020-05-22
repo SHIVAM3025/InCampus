@@ -25,6 +25,11 @@ import java.util.List;
 public class CreateCommunityAdminAdapter extends PagedListAdapter<Community_Admin_Response.Community_members, CreateCommunityAdminAdapter.CreateCommunityAdminHolder> {
 
     private Context context;
+    private OnPostClickListener onPostClickListener;
+
+    public interface OnPostClickListener {
+        void onPostClick(int position);
+    }
 
     public CreateCommunityAdminAdapter(Context context) {
         super(diffCallback);
@@ -51,7 +56,7 @@ public class CreateCommunityAdminAdapter extends PagedListAdapter<Community_Admi
     public CreateCommunityAdminHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.cardlayout_admin_managecommunity, null);
-        return new CreateCommunityAdminHolder(view);
+        return new CreateCommunityAdminHolder(view , onPostClickListener);
     }
 
     @Override
@@ -87,13 +92,20 @@ public class CreateCommunityAdminAdapter extends PagedListAdapter<Community_Admi
         ImageView profile_photo;
         Button button;
 
-        CreateCommunityAdminHolder(@NonNull View itemView) {
+        CreateCommunityAdminHolder(@NonNull View itemView , final OnPostClickListener onPostClickListener) {
             super(itemView);
 
             name = itemView.findViewById(R.id.society_name);
             followers = itemView.findViewById(R.id.followers);
             profile_photo = itemView.findViewById(R.id.society_photo);
             button = itemView.findViewById(R.id.button);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
 
 
         }

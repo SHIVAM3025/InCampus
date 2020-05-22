@@ -35,8 +35,23 @@ public class Community_Admin_Response {
         @SerializedName("id")
         private String id;
 
+        @SerializedName("community_id")
+        private String community_id;
+
         public Community_Admin_Response.community_to_members_relationship getCommunity_to_members_relationship() {
             return community_to_members_relationship;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getCommunity_id() {
+            return community_id;
+        }
+
+        public void setCommunity_id(String community_id) {
+            this.community_id = community_id;
         }
 
         public String getId() {
