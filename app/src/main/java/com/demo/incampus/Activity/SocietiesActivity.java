@@ -1,7 +1,9 @@
 package com.demo.incampus.Activity;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
@@ -29,6 +31,8 @@ public class SocietiesActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     SocietiesAdapter adapter;
     public static String title="Arts";
+    String user_id;
+    UserViewModel_Categories userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +54,18 @@ public class SocietiesActivity extends AppCompatActivity {
         TextView t = findViewById(R.id.aboutusTextView);
         t.setText(s);
 
+        SharedPreferences preferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        user_id = preferences.getString("user_id", "expires");
+
         title=s;
 
         //Recycler View Code
         recyclerView = findViewById(R.id.societiesRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        UserViewModel_Categories userViewModel = ViewModelProviders.of(this).get(UserViewModel_Categories.class);
+         userViewModel = ViewModelProviders.of(this).get(UserViewModel_Categories.class);
 
-        adapter = new SocietiesAdapter(this , "6321");
+        adapter = new SocietiesAdapter(this , user_id);
         userViewModel.userPagedList.observe(this, userModels -> adapter.submitList(userModels));
 
         recyclerView.setAdapter(adapter);
@@ -76,6 +83,22 @@ public class SocietiesActivity extends AppCompatActivity {
                 startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(SocietiesActivity.this).toBundle());
             }
         });
+
+        setOnClickListener();
+
+    }
+
+    private void setOnClickListener() {
+        adapter.setOnPostClickListener(position ->  {
+
+            Societies post = userViewModel.userPagedList.getValue().snapshot().get(position);
+
+
+            // Log.d(TAG, "onClick: " + position);
+        });
+
+
+        //TODO Tell moin to watch it again sometimes the data is not passed
     }
 
 }

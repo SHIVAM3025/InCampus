@@ -1,7 +1,9 @@
 package com.demo.incampus.Activity;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -21,7 +23,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.demo.incampus.Interface.Api;
+import com.demo.incampus.Network.GraphqlClient;
+import com.demo.incampus.Network.RetrofitClient;
 import com.demo.incampus.R;
+import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +38,8 @@ public class UsernameActivity extends AppCompatActivity {
 
     EditText username;
     private Button continueButton;
+    String user_id;
+    String jwt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +47,11 @@ public class UsernameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_username);
 
         //user stopped typing
-        final long delay = 600; // 60 milliseconds after user stops typing
+        final long delay = 300; // 60 milliseconds after user stops typing
         final long[] last_text_edit = {0};
         final Handler handler = new Handler();
+
+        SharedPreferences preferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
 
         Retrofit mRetrofit = new Retrofit.Builder()
                 .baseUrl("https://incampusbackend.herokuapp.com/api/v1/")
@@ -62,23 +71,19 @@ public class UsernameActivity extends AppCompatActivity {
                     api.username_search(username.getText().toString()).enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
-                            if (response.code() == 200  && response.body()!=null) {
-                                switch (response.body())
-                                {
-                                    case "Available" :
-                                       // Toast.makeText(UsernameActivity.this, "aval", Toast.LENGTH_SHORT).show();
+                            if (response.code() == 200 && response.body() != null) {
+                                switch (response.body()) {
+                                    case "Available":
+                                        // Toast.makeText(UsernameActivity.this, "aval", Toast.LENGTH_SHORT).show();
                                         continueButton.setVisibility(View.VISIBLE);
                                         break;
 
-                                    case "Username already exists" :
+                                    case "Username already exists":
                                         Toast.makeText(UsernameActivity.this, "Try another one", Toast.LENGTH_SHORT).show();
                                         break;
                                 }
 
-                            }
-
-                            else if(response.body() == null)
-                            {
+                            } else if (response.body() == null) {
                                 Toast.makeText(UsernameActivity.this, "Server response null error", Toast.LENGTH_SHORT).show();
                             }
 
@@ -143,21 +148,40 @@ public class UsernameActivity extends AppCompatActivity {
             }
         });
 
+        user_id = preferences.getString("user_id", "expires");
+        jwt = preferences.getString("JWT" , "expires");
+        jwt = "Bearer " + jwt;
+
         //moving to info activity
-        continueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (username.getText().toString().trim().length() >= 3) {
-                    Intent intent = new Intent(UsernameActivity.this, InfoActivity.class);
+        continueButton.setOnClickListener(v -> {
+            if (username.getText().toString().trim().length() >= 3 && !user_id.equals("expires") && !jwt.equals("Bearer expires")) {
 
-                    //setting flag
-                    intent.putExtra("flag", 0);
+                Toast.makeText(this, jwt, Toast.LENGTH_SHORT).show();
 
-                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(UsernameActivity.this).toBundle());
-                } else {
-                    username.getBackground().setTint(Color.RED);
-                    Toast.makeText(UsernameActivity.this, "The username must be three or more characters long", Toast.LENGTH_SHORT).show();
-                }
+                RetrofitClient.getInstance().getApi().username(jwt,  username.getText().toString()).enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                        if(response.isSuccessful()){
+
+                            Intent intent = new Intent(UsernameActivity.this, PhoneNumberActivity.class);
+                            intent.putExtra("flag", 0);
+                            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(UsernameActivity.this).toBundle());
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                    }
+                });
+
+
+            } else {
+                username.getBackground().setTint(Color.RED);
+                Toast.makeText(UsernameActivity.this, "Login Again", Toast.LENGTH_SHORT).show();
             }
         });
 

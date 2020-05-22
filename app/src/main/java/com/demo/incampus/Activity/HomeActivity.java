@@ -3,6 +3,7 @@ package com.demo.incampus.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
@@ -49,12 +50,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     //Initiate Variable
     RecyclerView recyclerView;
     HomeAdapter homeAdapter;
-    List<Home> homeList;
     long backPressedTime;
     Toast backPressedToast;
     int menuItemId;
     private Context context;
     private DrawerLayout drawerLayout;
+    public static String user_id;
     private LiveData<PagedList<Post>> homePagedList;
 
     @Override
@@ -62,6 +63,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         context=this;
+
+        SharedPreferences preferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        user_id = preferences.getString("user_id", "expires");
 
         //rel_layout covering the amount of screen
         RelativeLayout RL = findViewById(R.id.relLayout);
@@ -72,7 +76,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         ViewGroup.LayoutParams paramS = RL.getLayoutParams();
         paramS.height = (int) (height * 0.15);
         RL.setLayoutParams(paramS);
-
 
         //Tool Bar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -135,7 +138,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 .into(headerImage);
 
         //Recycler View Code
-        homeList = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

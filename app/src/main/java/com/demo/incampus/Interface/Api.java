@@ -19,6 +19,8 @@ import com.demo.incampus.Model.Register;
 import com.demo.incampus.Query.Profile_Post_Eligibility.CreatePostData;
 import com.google.gson.JsonObject;
 
+import org.json.JSONObject;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -31,8 +33,7 @@ import retrofit2.http.POST;
 public interface Api {
     @FormUrlEncoded
     @POST("register")
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    Call<Register> register(
+    Call<JsonObject> register(
             @Field("email") String username,
             @Field("username") String name,
             @Field("password") String password
@@ -40,7 +41,7 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("login")
-    Call<Register> login(
+    Call<JsonObject> login(
             @Field("username") String username,
             @Field("password") String password
     );
@@ -63,6 +64,15 @@ public interface Api {
             @Field("phone_number") String phoneNumber
     );
 
+
+    @FormUrlEncoded
+    @POST("username/")
+        // @Headers("Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieWFzaCIsImlhdCI6MTU4NDk2OTQ3MH0.y5elEi_0HoBx8H9pYn7p5qSn-669lixXK4RYYSvsBps")
+    Call<JsonObject> username(
+            @Header("Authorization") String header,
+            @Field("username") String phoneNumber
+    );
+
     @FormUrlEncoded
     @POST("verifyotp")
     Call<ResponseBody> verifyotp(
@@ -71,7 +81,7 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("social/android/auth/google")
-    Call<ResponseBody> google_id_token(
+    Call<JsonObject> google_id_token(
             @Field("id_token") String id_token_google
     );
 

@@ -2,7 +2,9 @@ package com.demo.incampus.Activity;
 
 import android.app.ActivityOptions;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Build;
@@ -41,6 +43,7 @@ public class InfoActivity extends AppCompatActivity implements AdapterView.OnIte
     int flag;
     private EditText dob_et;
     private Calendar c;
+    private String user_id;
     private EditText name;
 
     @Override
@@ -64,6 +67,10 @@ public class InfoActivity extends AppCompatActivity implements AdapterView.OnIte
         paramS[1].height = (int) (height * 0.15);
         relativeLayout.setLayoutParams(paramS[0]);
         relLayout.setLayoutParams(paramS[1]);
+
+        //Shared preferences
+        SharedPreferences preferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        user_id = preferences.getString("user_id", "expires");
 
         //check condition
         Intent intent = getIntent();
@@ -316,7 +323,7 @@ public class InfoActivity extends AppCompatActivity implements AdapterView.OnIte
 
         JsonObject jsonObject1 = new JsonObject();
         jsonObject1.addProperty("query","mutation MyMutation {\n" +
-                "  update_User(where: {user_id: {_eq: \"27\"}}, _set: {date_of_birth: \""+dob_et.getText().toString()+"\", gender: \""+gender_et.getSelectedItem().toString()+"\", name: \""+name.getText().toString()+"\", university: \""+univ.getSelectedItem().toString()+"\", course: \""+course.getSelectedItem().toString()+"\", education: \""+major.getSelectedItem().toString()+"\"}) {\n" +
+                "  update_User(where: {user_id: {_eq: \""+user_id+"\"}}, _set: {date_of_birth: \""+dob_et.getText().toString()+"\", gender: \""+gender_et.getSelectedItem().toString()+"\", name: \""+name.getText().toString()+"\", university: \""+univ.getSelectedItem().toString()+"\", course: \""+course.getSelectedItem().toString()+"\", education: \""+major.getSelectedItem().toString()+"\"}) {\n" +
                 "    affected_rows\n" +
                 "  }\n" +
                 "}\n");

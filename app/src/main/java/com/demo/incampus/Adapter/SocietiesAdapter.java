@@ -34,6 +34,15 @@ public class SocietiesAdapter extends PagedListAdapter<Societies, SocietiesAdapt
 
     private Context context;
     private String user_id;
+    private OnPostClickListener onPostClickListener;
+
+    public interface OnPostClickListener {
+        void onPostClick(int position);
+    }
+
+    public void setOnPostClickListener(OnPostClickListener onPostClickListener) {
+        this.onPostClickListener = onPostClickListener;
+    }
 
     public SocietiesAdapter(Context context  ,String user_id) {
         super(diffCallback);
@@ -46,7 +55,7 @@ public class SocietiesAdapter extends PagedListAdapter<Societies, SocietiesAdapt
     public SocietiesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.cardlayout_societies, null);
-        return new SocietiesViewHolder(view);
+        return new SocietiesViewHolder(view , onPostClickListener);
     }
 
     @Override
@@ -63,89 +72,86 @@ public class SocietiesAdapter extends PagedListAdapter<Societies, SocietiesAdapt
         final boolean[] follow = {true};
 
         Api api = GraphqlClient.getApi();
+        //TODO change this listener
+         holder.button.setOnClickListener(v -> {
+            if (follow[0]) {
+                holder.button.setText("REQUESTED");
+                holder.button.setEnabled(false);
 
-        holder.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (follow[0]) {
-                    holder.button.setText("REQUESTED");
-                    holder.button.setEnabled(false);
+               // Toast.makeText(context, "requested", Toast.LENGTH_SHORT).show();
+                holder.button.getBackground().setTint(Color.parseColor("#696969"));
+                follow[0] = false;
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("query" , "mutation MyMutation {\n" +
+                        "  update_Community(where: {community_id: {_eq: \""+posi.getCommunity_id()+"\"}}, _inc: {member_count: 1}) {\n" +
+                        "    affected_rows\n" +
+                        "  }\n" +
+                        "  insert_Community_members(objects: {user_id: \""+user_id+"\", isAdmin: false, isMod: false, community_id: \""+posi.getCommunity_id()+"\"}) {\n" +
+                        "    affected_rows\n" +
+                        "  }\n" +
+                        "}");
 
-                   // Toast.makeText(context, "requested", Toast.LENGTH_SHORT).show();
-                    holder.button.getBackground().setTint(Color.parseColor("#696969"));
-                    follow[0] = false;
-                    JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("query" , "mutation MyMutation {\n" +
-                            "  update_Community(where: {community_id: {_eq: \""+posi.getCommunity_id()+"\"}}, _inc: {member_count: 1}) {\n" +
-                            "    affected_rows\n" +
-                            "  }\n" +
-                            "  insert_Community_members(objects: {user_id: \""+user_id+"\", isAdmin: false, isMod: false, community_id: \""+posi.getCommunity_id()+"\"}) {\n" +
-                            "    affected_rows\n" +
-                            "  }\n" +
-                            "}");
-
-                    api.graphql(jsonObject).enqueue(new Callback<JsonObject>() {
-                        @Override
-                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                            if(response.isSuccessful())
-                            {
-                                Toast.makeText(context, response.body().toString(), Toast.LENGTH_SHORT).show();
-                                holder.button.setEnabled(true);
-                            }
-
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<JsonObject> call, Throwable t) {
+                api.graphql(jsonObject).enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                        if(response.isSuccessful())
+                        {
+                            Toast.makeText(context, response.body().toString(), Toast.LENGTH_SHORT).show();
                             holder.button.setEnabled(true);
-                            holder.button.setText("FOLLOW");
-                            holder.button.getBackground().setTint(Color.parseColor("#8A56AC"));
-                            follow[0] = true;
-
-                        }
-                    });
-
-
-
-                } else {
-                    holder.button.setText("FOLLOW");
-                    holder.button.setEnabled(false);
-                   // Toast.makeText(context, "follow", Toast.LENGTH_SHORT).show();
-                    holder.button.getBackground().setTint(Color.parseColor("#8A56AC"));
-                    follow[0] = true;
-
-                    JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("query" , "mutation MyMutation {\n" +
-                            "  update_Community(where: {community_id: {_eq: \""+posi.getCommunity_id()+"\"}}, _inc: {member_count: -1}) {\n" +
-                            "    affected_rows\n" +
-                            "  }\n" +
-                            " delete_Community_members(where: {user_id: {_eq: \""+user_id+"\"}, _and: {community_id: {_eq: \""+posi.getCommunity_id()+"\"}}}) {\n" +
-                            "    affected_rows\n" +
-                            "  }\n" +
-                            "}");
-
-                    api.graphql(jsonObject).enqueue(new Callback<JsonObject>() {
-                        @Override
-                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                            if(response.isSuccessful())
-                            {
-                                Toast.makeText(context, response.body().toString(), Toast.LENGTH_SHORT).show();
-                                holder.button.setEnabled(true);
-                            }
-
                         }
 
-                        @Override
-                        public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonObject> call, Throwable t) {
+                        holder.button.setEnabled(true);
+                        holder.button.setText("FOLLOW");
+                        holder.button.getBackground().setTint(Color.parseColor("#8A56AC"));
+                        follow[0] = true;
+
+                    }
+                });
+
+
+
+            } else {
+                holder.button.setText("FOLLOW");
+                holder.button.setEnabled(false);
+               // Toast.makeText(context, "follow", Toast.LENGTH_SHORT).show();
+                holder.button.getBackground().setTint(Color.parseColor("#8A56AC"));
+                follow[0] = true;
+
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("query" , "mutation MyMutation {\n" +
+                        "  update_Community(where: {community_id: {_eq: \""+posi.getCommunity_id()+"\"}}, _inc: {member_count: -1}) {\n" +
+                        "    affected_rows\n" +
+                        "  }\n" +
+                        " delete_Community_members(where: {user_id: {_eq: \""+user_id+"\"}, _and: {community_id: {_eq: \""+posi.getCommunity_id()+"\"}}}) {\n" +
+                        "    affected_rows\n" +
+                        "  }\n" +
+                        "}");
+
+                api.graphql(jsonObject).enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                        if(response.isSuccessful())
+                        {
+                            Toast.makeText(context, response.body().toString(), Toast.LENGTH_SHORT).show();
                             holder.button.setEnabled(true);
-                            holder.button.setText("REQUESTED");
-                            holder.button.setEnabled(false);
-                            holder.button.getBackground().setTint(Color.parseColor("#696969"));
-                            follow[0] = false;
                         }
-                    });
-                }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonObject> call, Throwable t) {
+                        holder.button.setEnabled(true);
+                        holder.button.setText("REQUESTED");
+                        holder.button.setEnabled(false);
+                        holder.button.getBackground().setTint(Color.parseColor("#696969"));
+                        follow[0] = false;
+                    }
+                });
             }
         });
     }
@@ -169,7 +175,7 @@ public class SocietiesAdapter extends PagedListAdapter<Societies, SocietiesAdapt
         ImageView society_photo;
         Button button;
 
-        SocietiesViewHolder(@NonNull View itemView) {
+        SocietiesViewHolder(@NonNull View itemView ,  final OnPostClickListener onPostClickListener) {
             super(itemView);
 
             society_name = itemView.findViewById(R.id.society_name);
@@ -177,6 +183,15 @@ public class SocietiesAdapter extends PagedListAdapter<Societies, SocietiesAdapt
             society_photo = itemView.findViewById(R.id.society_photo);
             button = itemView.findViewById(R.id.button);
 
+
+//            button.setOnClickListener(v -> {
+//                if (onPostClickListener != null) {
+//                    int position = getAdapterPosition();
+//                    if (position != RecyclerView.NO_POSITION) {
+//                        onPostClickListener.onPostClick(position);
+//                    }
+//                }
+//            });
 
         }
 

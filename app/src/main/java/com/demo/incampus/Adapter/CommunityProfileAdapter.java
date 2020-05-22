@@ -13,12 +13,12 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.demo.incampus.DiffUtils.CommunityProfile.Community_Profile_Response.Community_profile;
+import com.demo.incampus.DiffUtils.CommunityProfile.Community_Profile_Response.Posts;
 import com.demo.incampus.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class CommunityProfileAdapter extends PagedListAdapter<Community_profile, CommunityProfileAdapter.CommunityProfileViewHolder> {
+public class CommunityProfileAdapter extends PagedListAdapter<Posts, CommunityProfileAdapter.CommunityProfileViewHolder> {
 
     private Context context;
     private OnPostClickListener onPostClickListener;
@@ -33,16 +33,16 @@ public class CommunityProfileAdapter extends PagedListAdapter<Community_profile,
         this.context = context;
     }
 
-    private static DiffUtil.ItemCallback<Community_profile> diffCallback =
-            new DiffUtil.ItemCallback<Community_profile>() {
+    private static DiffUtil.ItemCallback<Posts> diffCallback =
+            new DiffUtil.ItemCallback<Posts>() {
                 @Override
-                public boolean areItemsTheSame(@NonNull Community_profile oldItem, @NonNull Community_profile newItem) {
+                public boolean areItemsTheSame(@NonNull Posts oldItem, @NonNull Posts newItem) {
                     // Post id will be used to differentiate b/w 2 posts
                     return oldItem.getPost_community().getPic_url().equals(newItem.getPost_community().getPic_url());
                 }
 
                 @Override
-                public boolean areContentsTheSame(@NonNull Community_profile oldItem, @NonNull Community_profile newItem) {
+                public boolean areContentsTheSame(@NonNull Posts oldItem, @NonNull Posts newItem) {
                     return oldItem.getPost_community().getPic_url().equals(newItem.getPost_community().getPic_url());
                 }
             };
@@ -58,7 +58,7 @@ public class CommunityProfileAdapter extends PagedListAdapter<Community_profile,
     @Override
     public void onBindViewHolder(@NonNull CommunityProfileViewHolder holder, int position) {
 
-        Community_profile post = getItem(position);
+        Posts post = getItem(position);
 
         holder.content.setText(post.getContent());
         holder.name.setText(post.getName());

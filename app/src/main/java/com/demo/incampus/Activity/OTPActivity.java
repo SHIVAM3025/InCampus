@@ -21,6 +21,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.demo.incampus.Model.Phone;
+import com.demo.incampus.Network.ScalarsClient;
 import com.demo.incampus.R;
 import com.demo.incampus.Network.RetrofitClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -63,16 +64,18 @@ public class OTPActivity extends AppCompatActivity {
         Point size = new Point();
         display.getSize(size);
         int height = size.y;
-        ViewGroup.LayoutParams paramS=RL.getLayoutParams();
-        paramS.height= (int) (height * 0.15);
+        ViewGroup.LayoutParams paramS = RL.getLayoutParams();
+        paramS.height = (int) (height * 0.15);
         RL.setLayoutParams(paramS);
 
         Intent i = getIntent();
         phoneNumber = i.getExtras().getString("phoneNumber");
         Log.i("Phone", phoneNumber);
 
+        Toast.makeText(this, phoneNumber, Toast.LENGTH_SHORT).show();
+
         SharedPreferences preferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        mnext=findViewById(R.id.next);
+        mnext = findViewById(R.id.next);
 
         et[0] = findViewById(R.id.etone);
         et[1] = findViewById(R.id.ettwo);
@@ -172,17 +175,17 @@ public class OTPActivity extends AppCompatActivity {
             }
         });
 
-
-        API_POST_receive_OTP(phoneNumber);//RECEIVE SessionID and OTP
-
         jwt_token = preferences.getString("JWT", "expires");
 
+        API_POST_receive_OTP(phoneNumber);//RECEIVE SessionID and OTP
 
         mnext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (vibe_check()) {
+                    OTP = "";
                     for (int i = 0; i < 6; i++) {
+
                         OTP += et[i].getText().toString();
                     }
 
@@ -212,7 +215,7 @@ public class OTPActivity extends AppCompatActivity {
         //API CALL RECEIVE OTP
         Toast.makeText(this, jwt_token, Toast.LENGTH_SHORT).show();
 
-        String token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwNCIsImlhdCI6MTU4OTk2MDM5MH0.-biRlMwX8UHOVLrXFnPesZA3GesCx87gy7PsvTHbBYo";
+        String token = "Bearer " + jwt_token;
         Call<Phone> otpReceive = RetrofitClient.getInstance().getApi().otpReceive(token, phoneNumber);
         otpReceive.enqueue(new Callback<Phone>() {
             @Override
@@ -256,8 +259,10 @@ public class OTPActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
+                    //String s = response.body().string();
+                    //  Log.i("verification", s);
 
-                    Intent intent = new Intent(OTPActivity.this, WalkthroughActivity.class);
+                    Intent intent = new Intent(OTPActivity.this, InfoActivity.class);
                     startActivity(intent);
 
                 } catch (Exception e) {
@@ -276,6 +281,27 @@ public class OTPActivity extends AppCompatActivity {
                 Toast.makeText(OTPActivity.this, "Error", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+        /*Call<String> verifyotp = ScalarsClient.getInstance().getApi().verifyotp(OTP, sessionID);
+        verifyotp.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                if (response.isSuccessful()) {
+                    Intent intent = new Intent(OTPActivity.this, InfoActivity.class);
+                    startActivity(intent);
+                } else {
+
+                    Toast.makeText(OTPActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(OTPActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        });*/
     }
 
     public void API_POST_login_user(String personGivenName, String personId) {

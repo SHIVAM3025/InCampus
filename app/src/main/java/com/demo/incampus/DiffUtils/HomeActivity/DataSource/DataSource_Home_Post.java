@@ -13,6 +13,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.demo.incampus.Activity.HomeActivity.user_id;
+
 public class DataSource_Home_Post extends PageKeyedDataSource<Integer, Post> {
 
     public static final int FIRST_PAGE_OFFSET = 0;
@@ -27,7 +29,7 @@ public class DataSource_Home_Post extends PageKeyedDataSource<Integer, Post> {
         JsonObject body = new JsonObject();
         int offset = FIRST_PAGE_OFFSET;
         body.addProperty("query", "query MyQuery {\n" +
-                "  Posts( limit: " + PAGE_SIZE + ", offset: " + offset + ", where : {_or: [{post_to_community_members: {user_id: {_eq: \"181\"}}}, {post_to_followers: {userid_from: {_eq: \"181\"}}}, {created_by: {_eq: \"181\"}}]}, order_by: {created_at: desc}) {\n" +
+                "  Posts( limit: " + PAGE_SIZE + ", offset: " + offset + ", where : {_or: [{post_to_community_members: {user_id: {_eq: \""+user_id+"\"}}}, {post_to_followers: {userid_from: {_eq: \""+user_id+"\"}}}, {created_by: {_eq: \""+user_id+"\"}}]}, order_by: {created_at: desc}) {\n" +
                 "    community_id\n" +
                 "    content\n" +
                 "    created_at\n" +
@@ -50,7 +52,7 @@ public class DataSource_Home_Post extends PageKeyedDataSource<Integer, Post> {
                 "        count\n" +
                 "      }\n" +
                 "    }\n" +
-                "  postUpvotesByPostId(where: {user_id: {_eq: \"181\"}}) {\n" +
+                "  postUpvotesByPostId(where: {user_id: {_eq: \""+user_id+"\"}}) {\n" +
                 "      user_id\n" +
                 "    }\n" +
                 "  }\n" +
@@ -80,7 +82,7 @@ public class DataSource_Home_Post extends PageKeyedDataSource<Integer, Post> {
         JsonObject body = new JsonObject();
         int offset = params.key;
         body.addProperty("query", "query MyQuery {\n" +
-                "  Posts( limit: " + PAGE_SIZE + ", offset: " + offset + ", where : {_or: [{post_to_community_members: {user_id: {_eq: \"181\"}}}, {post_to_followers: {userid_from: {_eq: \"181\"}}}, {created_by: {_eq: \"181\"}}]}, order_by: {created_at: desc}) {\n" +
+                "  Posts( limit: " + PAGE_SIZE + ", offset: " + offset + ", where : {_or: [{post_to_community_members: {user_id: {_eq: \""+user_id+"\"}}}, {post_to_followers: {userid_from: {_eq: \""+user_id+"\"}}}, {created_by: {_eq: \""+user_id+"\"}}]}, order_by: {created_at: desc}) {\n" +
                 "    community_id\n" +
                 "    content\n" +
                 "    created_at\n" +
@@ -103,7 +105,7 @@ public class DataSource_Home_Post extends PageKeyedDataSource<Integer, Post> {
                 "        count\n" +
                 "      }\n" +
                 "    }\n" +
-                "  postUpvotesByPostId(where: {user_id: {_eq: \"181\"}}) {\n" +
+                "  postUpvotesByPostId(where: {user_id: {_eq: \""+user_id+"\"}}) {\n" +
                 "      user_id\n" +
                 "    }\n" +
                 "  }\n" +
@@ -135,7 +137,7 @@ public class DataSource_Home_Post extends PageKeyedDataSource<Integer, Post> {
         JsonObject body = new JsonObject();
         int offset = params.key;
         body.addProperty("query", "query MyQuery {\n" +
-                "  Posts( limit: " + PAGE_SIZE + ", offset: " + offset + ", where : {_or: [{post_to_community_members: {user_id: {_eq: \"181\"}}}, {post_to_followers: {userid_from: {_eq: \"181\"}}}, {created_by: {_eq: \"181\"}}]}, order_by: {created_at: desc}) {\n" +
+                "  Posts( limit: " + PAGE_SIZE + ", offset: " + offset + ", where : {_or: [{post_to_community_members: {user_id: {_eq: \""+user_id+"\"}}}, {post_to_followers: {userid_from: {_eq: \""+user_id+"\"}}}, {created_by: {_eq: \""+user_id+"\"}}]}, order_by: {created_at: desc}) {\n" +
                 "    community_id\n" +
                 "    content\n" +
                 "    created_at\n" +
@@ -158,7 +160,7 @@ public class DataSource_Home_Post extends PageKeyedDataSource<Integer, Post> {
                 "        count\n" +
                 "      }\n" +
                 "    }\n" +
-                "  postUpvotesByPostId(where: {user_id: {_eq: \"181\"}}) {\n" +
+                "  postUpvotesByPostId(where: {user_id: {_eq: \""+user_id+"\"}}) {\n" +
                 "      user_id\n" +
                 "    }\n" +
                 "  }\n" +

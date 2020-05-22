@@ -5,9 +5,8 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" /> <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
-    <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!--<uses-permission android:name="android.permission.READ_SMS" />-->
     <uses-permission
         android:name="android.permission.USE_CREDENTIALS"
         android:maxSdkVersion="22" />
@@ -28,19 +27,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/Login">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
         </activity>
-
-
         <activity
             android:name=".Activity.UsernameActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login" />
+            android:theme="@style/Login" >
+        </activity>
         <activity
             android:name=".Activity.ManageEventsActivity"
             android:screenOrientation="portrait"
@@ -101,6 +93,11 @@
             android:name=".Activity.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Activity.StartaNewGroupActivity"
@@ -109,7 +106,9 @@
         <activity
             android:name=".Activity.PhoneNumberActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login"></activity>
+            android:theme="@style/Login">
+
+        </activity>
         <activity
             android:name=".Activity.SuccessGroupCreate"
             android:screenOrientation="portrait"
@@ -117,7 +116,9 @@
         <activity
             android:name=".Activity.CategoriesActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Login" />
+            android:theme="@style/Login" >
+
+        </activity>
         <activity
             android:name=".Activity.WalkthroughActivity"
             android:screenOrientation="portrait"
@@ -140,7 +141,8 @@
             android:name=".Activity.InfoActivity"
             android:noHistory="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Login"></activity>
+            android:theme="@style/Login">
+        </activity>
         <activity
             android:name=".Activity.OTPActivity"
             android:screenOrientation="portrait"

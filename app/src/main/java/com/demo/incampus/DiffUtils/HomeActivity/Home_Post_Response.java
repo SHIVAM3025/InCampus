@@ -34,12 +34,12 @@ public class Home_Post_Response {
 
         private PostCommunity post_community;
         private PostToUser post_to_user;
-        private postUpvotesByPostId_aggregate postUpvotesByPostId_aggregate;
-        private List<postUpvotesByPostId> user_idList ;
+        private PostUpvotesByPostId_Aggregate postUpvotesByPostId_aggregate;
+        private List<PostUpvotesByPostId> user_idList ;
 
         public Post(String post_id, String community_id, String content, String created_at, String created_by, String name, String pic_url,
                     String upvotes, String no_of_comments, PostCommunity post_community, PostToUser post_to_user,
-                    Home_Post_Response.postUpvotesByPostId_aggregate postUpvotesByPostId_aggregate, List<postUpvotesByPostId> user_idList) {
+                    Home_Post_Response.PostUpvotesByPostId_Aggregate postUpvotesByPostId_aggregate, List<PostUpvotesByPostId> user_idList) {
 
             this.post_id = post_id;
             this.community_id = community_id;
@@ -57,14 +57,14 @@ public class Home_Post_Response {
         }
 
 
-        public List<postUpvotesByPostId> getUser_idList() {
+        public List<PostUpvotesByPostId> getUser_idList() {
             if(user_idList == null){
                 return null;
             }
                 return user_idList;
         }
 
-        public postUpvotesByPostId_aggregate getPostUpvotesByPostId_aggregate() {
+        public PostUpvotesByPostId_Aggregate getPostUpvotesByPostId_aggregate() {
             return postUpvotesByPostId_aggregate;
         }
 
@@ -169,16 +169,16 @@ public class Home_Post_Response {
         }
     }
 
-    public static class postUpvotesByPostId {
+    public static class PostUpvotesByPostId {
 
         @SerializedName("user_id")
         private String user_id;
 
-        public postUpvotesByPostId() {
+        public PostUpvotesByPostId() {
 
         }
 
-        public postUpvotesByPostId(String user_id) {
+        public PostUpvotesByPostId(String user_id) {
             this.user_id = user_id;
         }
 
@@ -192,11 +192,11 @@ public class Home_Post_Response {
     }
 
 
-    public static class postUpvotesByPostId_aggregate {
+    public static class PostUpvotesByPostId_Aggregate {
 
         private Aggregate aggregate;
 
-        public postUpvotesByPostId_aggregate() {
+        public PostUpvotesByPostId_Aggregate() {
         }
 
         public Aggregate getAggregate() {

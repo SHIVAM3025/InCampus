@@ -38,6 +38,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -53,11 +57,8 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
     String authCode;
 
     int RC_SIGN_IN = 0;
-
     EditText email, password, username;
-
     String serverClientId = "678341947476-kri1kouc8pite5hnlpefi794rtmagan7.apps.googleusercontent.com";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -306,7 +307,7 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
 
             // Signed in successfully, show authenticated UI.
             Toast.makeText(this, account.getIdToken(), Toast.LENGTH_SHORT).show();
-            //API_POST_google_auth_response(account.getIdToken());
+           // API_POST_google_auth_response(account.getIdToken());
             Log.i("Token", account.getIdToken());
             Log.i("function", "inside handle sign in result");
             Toast.makeText(this, "Username", Toast.LENGTH_SHORT).show();
@@ -326,30 +327,49 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
         final SharedPreferences.Editor editor = preferences.edit();
 
         //API POST REGISTER
-        retrofit2.Call<Register> register = RetrofitClient.getInstance().getApi().register(personEmail, personGivenName, personPassword);
-        register.enqueue(new Callback<Register>() {
+        retrofit2.Call<JsonObject> register = RetrofitClient.getInstance().getApi().register(personEmail, personGivenName, personPassword);
+        register.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(retrofit2.Call<Register> call, Response<Register> response) {
-                try {
+            public void onResponse(retrofit2.Call<JsonObject> call, Response<JsonObject> response) {
 
-                    Register s = response.body();
-                    editor.putString("JWT", s.getAccessToken());
-                    editor.commit();
-                    Toast.makeText(SignUpActivity.this, s.getAccessToken(), Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(SignUpActivity.this, PhoneNumberActivity.class);
-                    startActivity(i);
+                if(response.isSuccessful()) {
 
+                    try {
+
+                        JSONObject jsonObject = new JSONObject(response.body().toString());
+                        JSONObject jsonObject1 = new JSONObject(jsonObject.getString("user"));
+
+                        String user_id = jsonObject1.getString("user_id");
+                        String JWT = jsonObject.getString("accessToken");
+                        Log.i("ID", user_id);
+                        Log.i("JWT", JWT);
+
+                        Toast.makeText(SignUpActivity.this, user_id + " :user_id", Toast.LENGTH_SHORT).show();
+                        //STORING USER ID
+                        editor.putString("user_id", user_id);
+                        editor.putString("JWT", JWT);
+                        editor.commit();
+
+                        Intent intent = new Intent(SignUpActivity.this , PhoneNumberActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
                     Log.i("response", "Got response from user");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(SignUpActivity.this, "User already registered!", Toast.LENGTH_SHORT).show();
-                    Log.i("No response", "exception");
+                }else
+                {
+                    Toast.makeText(SignUpActivity.this, Integer.toString(response.code()), Toast.LENGTH_SHORT).show();
+
                 }
+
+
             }
 
             @Override
-            public void onFailure(Call<Register> call, Throwable t) {
+            public void onFailure(Call<JsonObject> call, Throwable t) {
                 Toast.makeText(SignUpActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.i("Info", "No response for register user post");
             }
@@ -363,15 +383,15 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
         final SharedPreferences.Editor editor = preferences.edit();
 
         //API POST REGISTER
-        retrofit2.Call<ResponseBody> register = RetrofitClient.getInstance().getApi().google_id_token(id_token);
-        register.enqueue(new Callback<ResponseBody>() {
+        retrofit2.Call<JsonObject> register = RetrofitClient.getInstance().getApi().google_id_token(id_token);
+        register.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(retrofit2.Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(retrofit2.Call<JsonObject> call, Response<JsonObject> response) {
 
                 try {
                     if (response.isSuccessful()) {
-                        ResponseBody s = response.body();
-                        editor.putString("JWT", s.string());
+                     //   ResponseBody s = response.body();
+                       // editor.putString("JWT", s.string());
                         editor.commit();
                         Toast.makeText(SignUpActivity.this, "lion", Toast.LENGTH_SHORT).show();
 
@@ -389,7 +409,7 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<JsonObject> call, Throwable t) {
                 Toast.makeText(SignUpActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.i("Info", "No response for register user post");
             }

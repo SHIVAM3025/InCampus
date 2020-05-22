@@ -8,7 +8,6 @@ import java.util.Objects;
 
 public class Community_Profile_Response {
 
-    @SerializedName("data")
     private Data data;
 
     public Data getData() {
@@ -17,36 +16,34 @@ public class Community_Profile_Response {
 
     public static class Data {
         @SerializedName("Posts")
-        private List<Community_profile> community_profiles;
+        private List<Posts> posts;
 
-        public Data(List<Community_profile> community_profiles) {
-            this.community_profiles = community_profiles;
+        public Data(List<Posts> posts) {
+            this.posts = posts;
         }
 
-        public List<Community_profile> getCommunity_profiles() {
-            return community_profiles;
+        public List<Posts> getPosts() {
+            return posts;
         }
     }
 
-    public static class Community_profile{
+    public static class Posts {
+
         @SerializedName("content")
         String content;
-
         @SerializedName("created_at")
-        private String  created_at;
-
+        private String created_at;
         @SerializedName("name")
         String name;
         @SerializedName("no_of_comments")
         String no_of_comments;
+        @SerializedName("post_community")
+        private PostCommunity post_community;
+        @SerializedName("post_to_user")
+        private PostToUser post_to_user;
 
-        private post_community post_community;
-
-        private post_to_user post_to_user;
-
-
-        public Community_profile(String content, String created_at, String name, String no_of_comments,
-                                 Community_Profile_Response.post_community post_community, Community_Profile_Response.post_to_user post_to_user) {
+        public Posts(String content, String created_at, String name, String no_of_comments,
+                                 Community_Profile_Response.PostCommunity post_community, Community_Profile_Response.PostToUser post_to_user) {
             this.content = content;
             this.created_at = created_at;
             this.name = name;
@@ -55,35 +52,59 @@ public class Community_Profile_Response {
             this.post_to_user = post_to_user;
         }
 
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+
         public String getCreated_at() {
             return created_at;
         }
 
-        public String getContent() {
-            return content;
+        public void setCreated_at(String created_at) {
+            this.created_at = created_at;
         }
 
         public String getName() {
             return name;
         }
 
+        public void setName(String name) {
+            this.name = name;
+        }
+
         public String getNo_of_comments() {
             return no_of_comments;
         }
 
-        public Community_Profile_Response.post_community getPost_community() {
+        public void setNo_of_comments(String no_of_comments) {
+            this.no_of_comments = no_of_comments;
+        }
+
+        public Community_Profile_Response.PostCommunity getPost_community() {
             return post_community;
         }
 
-        public Community_Profile_Response.post_to_user getPost_to_user() {
+        public void setPost_community(Community_Profile_Response.PostCommunity post_community) {
+            this.post_community = post_community;
+        }
+
+        public Community_Profile_Response.PostToUser getPost_to_user() {
             return post_to_user;
+        }
+
+        public void setPost_to_user(Community_Profile_Response.PostToUser post_to_user) {
+            this.post_to_user = post_to_user;
         }
 
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
-            Community_profile that = (Community_profile) o;
+            Posts that = (Posts) o;
             return Objects.equals(content, that.content) &&
                     Objects.equals(created_at, that.created_at) &&
                     Objects.equals(name, that.name) &&
@@ -98,11 +119,11 @@ public class Community_Profile_Response {
         }
     }
 
-    public static class post_to_user
+    public static class PostToUser
     {   @SerializedName("name")
         String name;
 
-        public post_to_user() {
+        public PostToUser() {
         }
 
         public String getName() {
@@ -115,11 +136,11 @@ public class Community_Profile_Response {
     }
 
 
-    public static class post_community{
-
+    public static class PostCommunity{
+        @SerializedName("pic_url")
         String pic_url;
 
-        public post_community() {
+        public PostCommunity() {
         }
 
         public String getPic_url() {

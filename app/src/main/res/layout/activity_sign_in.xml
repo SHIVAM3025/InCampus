@@ -90,6 +90,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
+        android:visibility="gone"
         android:fontFamily="@font/montserrat_semi_bold"
         android:text="FORGOT PASSWORD"
         android:textColor="@color/colorPrimary"

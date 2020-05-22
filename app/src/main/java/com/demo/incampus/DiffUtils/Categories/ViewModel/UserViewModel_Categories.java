@@ -14,6 +14,7 @@ public class UserViewModel_Categories extends ViewModel {
 
     //creating livedata for PagedList and PagedKeyedDataSource
     public LiveData<PagedList<Societies>> userPagedList;
+
     LiveData<PageKeyedDataSource<Integer, Societies>> liveDataSource;
 
     public UserViewModel_Categories() {
